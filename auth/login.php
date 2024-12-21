@@ -1,36 +1,3 @@
-<?php
-session_start();
-include '../config/connection.php';
-
-if (isset($_POST['login'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    // Ambil koneksi dari fungsi
-    $pdo = getConnection();
-
-    // Query untuk memeriksa email dan mengambil hash password
-    $query = "SELECT * FROM users WHERE email = :email";
-    $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
-
-    if ($stmt->rowCount() > 0) {
-        $user = $stmt->fetch();
-        
-        // Verifikasi password hash
-        if (password_verify($password, $user['password'])) {
-            $_SESSION['user'] = $email;
-            header("Location: ../index.php");
-            exit();
-        } else {
-            $error = "Password salah!";
-        }
-    } else {
-        $error = "Email tidak ditemukan!";
-    }
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
