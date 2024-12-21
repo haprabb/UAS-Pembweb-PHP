@@ -200,13 +200,92 @@
                                         <td><span class="badge bg-warning">Pending</span></td>
                                         <td>Rp 3.500.000</td>
                                         <td>
-                                            <button class="btn btn-sm btn-info">Edit</button>
-                                            <button class="btn btn-sm btn-danger">Hapus</button>
+                                            <button class="btn btn-sm btn-info" onclick="showEditForm('#12346')">Edit</button>
+                                            <button class="btn btn-sm btn-danger" onclick="showDeleteConfirm('#12346')">Hapus</button>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
+
+                        <!-- Form Edit Pemesanan -->
+                        <div id="editForm" class="mt-4" style="display:none;">
+                            <h4>Edit Pemesanan</h4>
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">ID Pemesanan</label>
+                                        <input type="text" class="form-control" id="editBookingId" readonly>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Tanggal</label>
+                                        <input type="date" class="form-control" id="editDate">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Pelanggan</label>
+                                        <input type="text" class="form-control" id="editCustomer">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Destinasi</label>
+                                        <input type="text" class="form-control" id="editDestination">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Status</label>
+                                        <select class="form-control" id="editStatus">
+                                            <option value="pending">Pending</option>
+                                            <option value="success">Sukses</option>
+                                            <option value="cancelled">Dibatalkan</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Total</label>
+                                        <input type="text" class="form-control" id="editTotal">
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" onclick="saveEdit()">Simpan Perubahan</button>
+                                <button type="button" class="btn btn-secondary" onclick="hideEditForm()">Batal</button>
+                            </form>
+                        </div>
+
+                        <!-- Konfirmasi Hapus -->
+                        <div id="deleteConfirm" class="mt-4" style="display:none;">
+                            <div class="alert alert-danger">
+                                <h5>Konfirmasi Penghapusan</h5>
+                                <p>Apakah Anda yakin ingin menghapus pemesanan <span id="deleteBookingId"></span>?</p>
+                                <button class="btn btn-danger" onclick="confirmDelete()">Ya, Hapus</button>
+                                <button class="btn btn-secondary" onclick="hideDeleteConfirm()">Batal</button>
+                            </div>
+                        </div>
+
+                        <script>
+                            function showEditForm(id) {
+                                document.getElementById('editForm').style.display = 'block';
+                                document.getElementById('editBookingId').value = id;
+                            }
+
+                            function hideEditForm() {
+                                document.getElementById('editForm').style.display = 'none';
+                            }
+
+                            function saveEdit() {
+                                alert('Perubahan telah disimpan!');
+                                hideEditForm();
+                            }
+
+                            function showDeleteConfirm(id) {
+                                document.getElementById('deleteConfirm').style.display = 'block';
+                                document.getElementById('deleteBookingId').textContent = id;
+                            }
+
+                            function hideDeleteConfirm() {
+                                document.getElementById('deleteConfirm').style.display = 'none';
+                            }
+
+                            function confirmDelete() {
+                                alert('Data telah dihapus!');
+                                hideDeleteConfirm();
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
@@ -379,7 +458,7 @@
 
             <div id="users" class="content-section">
                 <h2>Manajemen Pengguna</h2>
-                <div class="card">
+                <div class="card mb-4">
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
@@ -401,13 +480,86 @@
                                         <td><span class="badge bg-success">Aktif</span></td>
                                         <td>2023-09-01</td>
                                         <td>
-                                            <button class="btn btn-sm btn-warning">Edit</button>
-                                            <button class="btn btn-sm btn-danger">Nonaktifkan</button>
+                                            <button class="btn btn-sm btn-danger" onclick="toggleDeactivateForm(1)">Nonaktifkan</button>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
+
+                <h2>Manajemen Admin</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nama</th>
+                                        <th>Email</th>
+                                        <th>Level</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Super Admin</td>
+                                        <td>admin@sistem.com</td>
+                                        <td>Super Admin</td>
+                                        <td><span class="badge bg-success">Aktif</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger">Hapus</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                        <!-- Form Konfirmasi Nonaktifkan -->
+                        <div id="deactivateForm" class="mt-4" style="display: none;">
+                            <div class="card">
+                                <div class="card-header bg-warning text-dark">
+                                    <h5>Konfirmasi Nonaktifkan Pengguna</h5>
+                                </div>
+                                <div class="card-body">
+                                    <input type="hidden" id="deactivateUserId">
+                                    <p>Apakah Anda yakin ingin menonaktifkan pengguna <strong id="deactivateUserName"></strong>?</p>
+                                    <p>Tindakan ini akan mencabut akses pengguna ke sistem.</p>
+                                    <button type="button" class="btn btn-danger" onclick="nonaktifkanPengguna()">Ya, Nonaktifkan</button>
+                                    <button type="button" class="btn btn-secondary" onclick="toggleDeactivateForm()">Batal</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            const userData = {
+                                1: { nama: 'Ahmad Rizki', email: 'ahmad@email.com', status: 'aktif' }
+                            };
+
+                            function toggleDeactivateForm(userId = null) {
+                                const form = document.getElementById('deactivateForm');
+                                if (userId) {
+                                    document.getElementById('deactivateUserId').value = userId;
+                                    document.getElementById('deactivateUserName').textContent = userData[userId].nama;
+                                    form.style.display = 'block';
+                                } else {
+                                    form.style.display = 'none';
+                                }
+                            }
+
+                            function nonaktifkanPengguna() {
+                                const userId = document.getElementById('deactivateUserId').value;
+                                userData[userId].status = 'nonaktif';
+                                alert('Pengguna berhasil dinonaktifkan!');
+                                toggleDeactivateForm();
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
