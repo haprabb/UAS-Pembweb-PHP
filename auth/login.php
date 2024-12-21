@@ -158,7 +158,7 @@
             
             <p class="text-center login-text animate__animated animate__fadeInUp" style="animation-delay: 1.3s">
                 Belum punya akun? 
-                <a href="login.php" class="login-link">Register here</a>
+                <a href="register.php" class="login-link">Register here</a>
             </p>
         </form>
     </div>
