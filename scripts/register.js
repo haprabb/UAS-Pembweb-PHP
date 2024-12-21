@@ -1,30 +1,38 @@
-document.getElementById('registerForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+// 3D Tilt Effect
+const container = document.querySelector('.register-container');
 
-    // Animasi saat submit
-    const button = document.querySelector('button[type="submit"]');
-    button.classList.add('animate__animated', 'animate__pulse');
+container.addEventListener('mousemove', (e) => {
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-    // Validasi password match
-    const password = document.getElementById('password').value;
-    const konfirmasi = document.getElementById('konfirmasi_password').value;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
 
-    if (password !== konfirmasi) {
-        alert('Password tidak cocok!');
-        return;
-    }
+    const rotateX = (y - centerY) / 30;
+    const rotateY = -(x - centerX) / 30;
 
-    // Proses form submission bisa ditambahkan disini
+    container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 });
 
-// Animasi hover pada input
-const inputs = document.querySelectorAll('.form-control');
-inputs.forEach(input => {
-    input.addEventListener('focus', function () {
-        this.parentElement.classList.add('animate__animated', 'animate__pulse');
-    });
+container.addEventListener('mouseleave', () => {
+    container.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+});
 
-    input.addEventListener('blur', function () {
-        this.parentElement.classList.remove('animate__animated', 'animate__pulse');
-    });
+// Form Submit Animation
+const form = document.getElementById('registerForm');
+const spinner = document.querySelector('.loading-spinner');
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    spinner.style.display = 'inline-block';
+
+    // Simulate form submission
+    setTimeout(() => {
+        button.disabled = false;
+        spinner.style.display = 'none';
+        // Add your form submission logic here
+    }, 2000);
 });
