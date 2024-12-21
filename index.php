@@ -1,16 +1,5 @@
 <?php
-// session_start();
-// require_once 'config/connection.php';
 
-// // Cek login
-// if (!isset($_SESSION['user_id'])) {
-//     header('Location: auth/login.php');
-//     exit();
-// }
-
-// // Ambil data tiket
-// $stmt = $pdo->query("SELECT * FROM tickets ORDER BY departure_time");
-// $tickets = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,13 +12,29 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo">TravelKuy</div>
+        <div class="logo">
+            <i class="fas fa-plane-departure"></i>
+            <span>TravelKuy</span>
+        </div>
         <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#destinations">Destinasi</a>
-            <a href="#features">Fitur</a>
-            <a href="#about">Tentang</a>
-            <a href="auth/login.php" class="book-btn">Login</a>
+            <a href="#home" class="nav-item"><i class="fas fa-home"></i> Home</a>
+            <a href="#destinations" class="nav-item"><i class="fas fa-map-marked-alt"></i> Destinasi</a>
+            <a href="#features" class="nav-item"><i class="fas fa-star"></i> Fitur</a>
+            <a href="#about" class="nav-item"><i class="fas fa-info-circle"></i> Tentang</a>
+            <?php if(!isset($_COOKIE['logus135'])): ?>
+                <a href="auth/login.php" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Login</span>
+                </a>
+            <?php else: ?>
+                <div class="user-profile">
+                    <img src="images/user/" alt="User Profile" class="profile-img">
+                    <div class="dropdown-content">
+                        <a href="auth/profile.php"><i class="fas fa-user"></i> Profil</a>
+                        <a href="auth/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            <?php endif; ?>
         </div>
     </nav>
 

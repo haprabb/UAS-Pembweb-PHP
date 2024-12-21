@@ -45,7 +45,7 @@ if (isset($_POST['login'])) {
            <p>Silakan login untuk melanjutkan perjalanan Anda</p>
        </div>
        
-       <form action="../index.php" method="POST">
+       <form action="../logic/login-auth.php" method="POST" name="form-login">
            <div class="form-group">
                <label for="email">Email</label>
                <input type="email" id="email" name="email" required>
@@ -56,7 +56,7 @@ if (isset($_POST['login'])) {
                <input type="password" id="password" name="password" required>
            </div>
            
-           <button type="submit" class="login-btn">Masuk</button>
+           <button type="submit" class="login-btn" name="button-login">Masuk</button>
        </form>
        
        <div class="register-link">
