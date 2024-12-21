@@ -1,16 +1,16 @@
 <?php
-session_start();
-require_once 'config/connection.php';
+// session_start();
+// require_once 'config/connection.php';
 
-// Cek login
-if (!isset($_SESSION['user_id'])) {
-    header('Location: auth/login.php');
-    exit();
-}
+// // Cek login
+// if (!isset($_SESSION['user_id'])) {
+//     header('Location: auth/login.php');
+//     exit();
+// }
 
-// Ambil data tiket
-$stmt = $pdo->query("SELECT * FROM tickets ORDER BY departure_time");
-$tickets = $stmt->fetchAll();
+// // Ambil data tiket
+// $stmt = $pdo->query("SELECT * FROM tickets ORDER BY departure_time");
+// $tickets = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html>
