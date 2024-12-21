@@ -24,6 +24,7 @@ if (isset($_POST["button-login"])) {
                setcookie("logus135", $result[0]['password'], time() + (60 * 60 * 24), "/");
                setcookie("logusname", $result[0]['name'], time() + (60 * 60 * 24), "/");
                setcookie("logusrole", $result[0]['role'], time() + (60 * 60 * 24), "/");
+               setcookie("logusemail", $result[0]['email'], time() + (60 * 60 * 24), "/");
                echo <<<SCRIPT
                <script>
                    alert('Selamat datang Admin!');
@@ -36,6 +37,7 @@ if (isset($_POST["button-login"])) {
                setcookie("logus135", $result[0]['password'], time() + (60 * 60 * 24), "/");
                setcookie("logusname", $result[0]['name'], time() + (60 * 60 * 24), "/");
                setcookie("logusrole", $result[0]['role'], time() + (60 * 60 * 24), "/");
+               setcookie("logusemail", $result[0]['email'], time() + (60 * 60 * 24), "/");
                echo <<<SCRIPT
                <script>
                    alert('Berhasil Login!');
