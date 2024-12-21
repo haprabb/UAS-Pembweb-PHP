@@ -2,18 +2,18 @@
 
 include "../config/connection.php";
 
-$name = $_POST["nama"];
-$email = $_POST["akun"];
+$name = $_POST["name"];
+$email = $_POST["email"];
 $password = $_POST["password"];
 
-if (isset($_POST["submit-register"])) {
-
+if (isset($_POST["button-register"])) {
 
     $con = getConnection();
     $query = "SELECT email FROM users WHERE email='$email'";
     $result = $con->query($query);
     $result = $result->fetchAll();
     if (count($result) > 0) {
+        $con = null;
         echo <<<SCRIPT
         <script>
             alert('Akun tersebut sudah ada!');
@@ -28,6 +28,7 @@ if (isset($_POST["submit-register"])) {
         $insert = "INSERT INTO users(name, email, password, role) VALUES('$name', '$email', '$password', 'user')";
 
         $con->exec($insert);
+        $con = null;
         echo <<<SCRIPT
         <script>
             alert('Berhasil mendaftar!');

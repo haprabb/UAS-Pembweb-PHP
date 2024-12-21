@@ -166,7 +166,7 @@
                 <div class="password-feedback" id="confirmPasswordFeedback">Password tidak cocok</div>
             </div>
 
-            <button type="submit" class="btn btn-register w-100 mb-4 animate__animated animate__fadeInUp" style="animation-delay: 1.1s" id="submitBtn" disabled>Register</button>
+            <button type="submit" name="button-register" class="btn btn-register w-100 mb-4 animate__animated animate__fadeInUp" style="animation-delay: 1.1s" id="submitBtn" disabled>Register</button>
             
             <p class="text-center login-text animate__animated animate__fadeInUp" style="animation-delay: 1.3s">
                 Already have an account? 
