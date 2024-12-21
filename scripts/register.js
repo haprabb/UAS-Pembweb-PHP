@@ -1,49 +1,30 @@
-function switchForm(type) {
-    const formContainer = document.querySelector('.form-container');
-    const slider = document.querySelector('.slider');
-    const tabs = document.querySelectorAll('.nav-link');
+document.getElementById('registerForm').addEventListener('submit', function (e) {
+    e.preventDefault();
 
-    if (type === 'login') {
-        formContainer.classList.add('show-login');
-        slider.classList.add('login');
-        tabs[1].classList.add('active');
-        tabs[0].classList.remove('active');
-    } else {
-        formContainer.classList.remove('show-login');
-        slider.classList.remove('login');
-        tabs[0].classList.add('active');
-        tabs[1].classList.remove('active');
+    // Animasi saat submit
+    const button = document.querySelector('button[type="submit"]');
+    button.classList.add('animate__animated', 'animate__pulse');
+
+    // Validasi password match
+    const password = document.getElementById('password').value;
+    const konfirmasi = document.getElementById('konfirmasi_password').value;
+
+    if (password !== konfirmasi) {
+        alert('Password tidak cocok!');
+        return;
     }
-}
 
-// Form validation
-const forms = document.querySelectorAll('form');
-forms.forEach(form => {
-    form.addEventListener('submit', event => {
-        event.preventDefault();
-        if (!form.checkValidity()) {
-            event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-    });
+    // Proses form submission bisa ditambahkan disini
 });
 
-// Password confirmation validation
-const password = document.getElementById('password');
-const confirmPassword = document.getElementById('confirm_password');
-if (confirmPassword) {
-    confirmPassword.addEventListener('input', function () {
-        if (this.value !== password.value) {
-            this.setCustomValidity('Passwords do not match');
-        } else {
-            this.setCustomValidity('');
-        }
+// Animasi hover pada input
+const inputs = document.querySelectorAll('.form-control');
+inputs.forEach(input => {
+    input.addEventListener('focus', function () {
+        this.parentElement.classList.add('animate__animated', 'animate__pulse');
     });
-    password.addEventListener('input', function () {
-        if (confirmPassword.value !== this.value) {
-            confirmPassword.setCustomValidity('Passwords do not match');
-        } else {
-            confirmPassword.setCustomValidity('');
-        }
+
+    input.addEventListener('blur', function () {
+        this.parentElement.classList.remove('animate__animated', 'animate__pulse');
     });
-}
+});

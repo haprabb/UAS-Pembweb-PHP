@@ -1,296 +1,55 @@
 body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    font-family: 'Poppins', sans-serif;
-    padding: 2rem 0;
-}
-
-.auth-container {
-    max-width: 1000px;
-    margin: auto;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 40px;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    position: relative;
-    animation: fadeIn 1s ease-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.auth-inner {
-    display: flex;
-    min-height: 600px;
-    position: relative;
-}
-
-.auth-image {
-    flex: 1;
-    background: url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80') center/cover;
-    position: relative;
+    background: linear-gradient(135deg, #9c27b0, #673ab7);
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-    animation: scaleIn 1.2s ease-out;
 }
 
-@keyframes scaleIn {
-    from {
-        transform: scale(0.95);
-        opacity: 0;
-    }
-
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-.auth-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
-}
-
-.auth-image-content {
-    position: relative;
-    color: white;
-    text-align: center;
-    z-index: 1;
-    animation: slideInLeft 1s ease-out;
-}
-
-@keyframes slideInLeft {
-    from {
-        transform: translateX(-50px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-.auth-form {
-    flex: 1;
-    padding: 3rem;
-    animation: slideInRight 1s ease-out;
-}
-
-@keyframes slideInRight {
-    from {
-        transform: translateX(50px);
-        opacity: 0;
-    }
-
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-.form-floating {
-    margin-bottom: 1rem;
-    transition: transform 0.3s ease;
-}
-
-.form-floating:hover {
-    transform: translateY(-2px);
+.register-container {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    max-width: 500px;
+    width: 90%;
 }
 
 .form-control:focus {
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
-    border-color: #667eea;
+    border-color: #9c27b0;
+    box-shadow: 0 0 0 0.25rem rgba(156, 39, 176, 0.25);
 }
 
-.btn-auth {
-    width: 100%;
-    padding: 0.8rem;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    border: none;
+.btn-purple {
+    background-color: #9c27b0;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-purple:hover {
+    background-color: #7b1fa2;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(156, 39, 176, 0.4);
+}
+
+.form-floating {
+    margin-bottom: 20px;
+}
+
+.form-control {
     border-radius: 10px;
-    color: white;
-    font-weight: 600;
-    margin-top: 1rem;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
 }
 
-.btn-auth:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-}
-
-.btn-auth::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.6s ease, height 0.6s ease;
-}
-
-.btn-auth:active::after {
-    width: 300px;
-    height: 300px;
-}
-
-.social-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0.5rem;
-    background: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    animation: bounceIn 1s ease-out;
-    animation-delay: calc(var(--i) * 0.2s);
-}
-
-@keyframes bounceIn {
-    0% {
-        transform: scale(0);
-    }
-
-    50% {
-        transform: scale(1.2);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-.social-btn:hover {
-    transform: translateY(-2px) rotate(8deg);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.auth-tabs {
-    background: rgba(102, 126, 234, 0.1);
-    padding: 0.5rem;
-    border-radius: 20px;
-    margin-bottom: 2rem;
-    display: flex;
-    position: relative;
-}
-
-.nav-link {
-    flex: 1;
+.register-title {
+    color: #9c27b0;
+    margin-bottom: 30px;
     text-align: center;
-    color: #764ba2;
-    font-weight: 600;
-    padding: 1rem;
-    border-radius: 15px;
-    transition: all 0.3s ease;
-    position: relative;
-    z-index: 2;
-    cursor: pointer;
 }
 
-.nav-link:hover {
-    transform: scale(1.05);
-}
-
-.nav-link.active {
+.input-group-text {
+    background-color: #9c27b0;
     color: white;
-}
-
-.slider {
-    position: absolute;
-    width: calc(50% - 10px);
-    height: calc(100% - 10px);
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    border-radius: 15px;
-    top: 5px;
-    left: 5px;
-    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.slider.login {
-    transform: translateX(calc(100% + 10px));
-}
-
-.form-container {
-    position: relative;
-    overflow: hidden;
-    min-height: 400px;
-}
-
-.form-section {
-    position: absolute;
-    width: 100%;
-    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55),
-        opacity 0.3s ease-in-out;
-}
-
-.register-form {
-    transform: translateX(0);
-    opacity: 1;
-}
-
-.login-form {
-    transform: translateX(100%);
-    opacity: 0;
-}
-
-.show-login .register-form {
-    transform: translateX(-100%);
-    opacity: 0;
-}
-
-.show-login .login-form {
-    transform: translateX(0);
-    opacity: 1;
-}
-
-/* Input focus animation */
-.form-floating input:focus+label {
-    color: #667eea;
-    transform: translateY(-1.5rem) scale(0.85);
-}
-
-/* Error shake animation */
-@keyframes shake {
-    0%, 100% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(-10px);
-    }
-
-    75% {
-        transform: translateX(10px);
-    }
-}
-
-.shake {
-    animation: shake 0.5s ease-in-out;
+    border: none;
 }
