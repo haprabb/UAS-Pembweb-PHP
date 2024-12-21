@@ -24,6 +24,7 @@ if (isset($_POST["button-login"])) {
         if (password_verify($password, $result[0]['password'])) {
             $con = null;
             setcookie("logus135", $result[0]['password'], time() + (60 * 60 * 24), "/");
+            setcookie("logusname", $result[0]['name'], time() + (60 * 60 * 24), "/");
             echo <<<SCRIPT
         <script>
             alert('Berhasil Login!');

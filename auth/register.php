@@ -145,7 +145,7 @@
         
         <form id="registerForm" action="../logic/register-auth.php" method="POST">
             <div class="form-floating mb-4 animate__animated animate__fadeInLeft" style="animation-delay: 0.3s">
-                <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required maxlength="15">
                 <label for="name">Full Name</label>
             </div>
 
