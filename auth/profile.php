@@ -3,6 +3,7 @@
 
 include "../query-db/history.php";
 include "../query-db/reviews.php";
+include "../query-db/users.php";
 include "../config/connection.php";
 
 // Cek login user
@@ -18,6 +19,7 @@ $userID = $_COOKIE["logusid"];
 
 $dataHistoryUser = getHistoryUser(getConnection(), $userID);
 $dataRatingUser = getRatingUser(getConnection(), $userID);
+$gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
 ?>
 
 <!DOCTYPE html>
@@ -308,7 +310,7 @@ $dataRatingUser = getRatingUser(getConnection(), $userID);
     <div class="profile-container">
         <div class="profile-header">
             <div class="profile-avatar">
-                <img src="../images/user/default-photo.jpg" alt="Profile Picture" id="profileImage" class="rounded-circle border" style="width: 150px; height: 150px; object-fit: cover;">
+                <img src="../images/user/<?= $gambarUser ?>" alt="Profile Picture" id="profileImage" class="rounded-circle border" style="width: 150px; height: 150px; object-fit: cover;">
             </div>
 
 
@@ -375,6 +377,8 @@ $dataRatingUser = getRatingUser(getConnection(), $userID);
                 <!-- Form untuk upload gambar -->
             <form action="../logic/update-profile-user.php" method="post" enctype="multipart/form-data" id="updateAvatarForm" class="text-center mt-4">
                 <div class="mb-3">
+                    <input type="hidden" name="user-id" value="<?= $_COOKIE["logusid"] ?>">
+                    <input type="hidden" name="user-name" value="<?= $_COOKIE["logusname"] ?>">
                     <label for="avatarInput" class="form-label">Pilih Gambar Baru</label>
                     <input type="file" id="avatarInput" class="form-control" accept="image/*" name="update-image">
                 </div>
