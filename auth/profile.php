@@ -383,9 +383,12 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                 </button>
 
                 <!-- Tombol Lihat History -->
-                <button type="button" class="btn btn-outline-light border border-secondary text-dark">
+                 <a href="history-user.php">
+                 <button type="button" class="btn btn-outline-light border border-secondary text-dark">
                     Lihat History
                 </button>
+                 </a>
+                
             </div>
             <div id="panel">
                 <!-- Form untuk upload gambar -->

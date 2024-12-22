@@ -134,7 +134,7 @@
         <div class="container">
             <!-- Brand -->
             <a class="navbar-brand" href="#">
-                TravelKuy<span class="text-primary">.</span>
+                Riwayat Pemesanan<span class="text-primary">.</span>
             </a>
 
             <!-- Toggler Button -->
@@ -147,16 +147,7 @@
                 <!-- Menu Items -->
                 <ul class="navbar-nav align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="destinasi.php">Destinasi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#features">Fitur</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">Tentang</a>
+                        <a class="nav-link" href="../index.php">Home</a>
                     </li>
 
                     <!-- Login/Profile Section -->
@@ -169,7 +160,7 @@
                     <?php else: ?>
                         <li class="nav-item dropdown ms-3">
                             <a class="nav-link dropdown-toggle user-profile d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="images/user/<?= $gambarUser ?>" alt="User Profile" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                <img src="../images/user/<?= $gambarUser ?>" alt="User Profile" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
                                 <span class="d-none d-lg-inline fw-medium"><?php echo $_COOKIE['logusname']; ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end slideIn" aria-labelledby="userDropdown">
@@ -198,6 +189,11 @@
             </div>
         </div>
     </nav>
+    
+<!-- table riwayat pemesanan -->
+
+
+
 </body>
 
 </html>
