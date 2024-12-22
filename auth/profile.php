@@ -1,4 +1,10 @@
 <?php
+
+
+include "../query-db/history.php";
+include "../query-db/reviews.php";
+include "../config/connection.php";
+
 // Cek login user
 if (!isset($_COOKIE['logus135'])) {
     header("Location: auth/login.php");
@@ -8,16 +14,23 @@ if (!isset($_COOKIE['logus135'])) {
 // Ambil data user dari cookie
 $userName = $_COOKIE['logusname'];
 $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saat login
+$userID = $_COOKIE["logusid"];
+
+$dataHistoryUser = getHistoryUser(getConnection(), $userID);
+$dataRatingUser = getRatingUser(getConnection(), $userID);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile - <?= $userName ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="../styles/profile.css">
     <style>
         .profile-container {
@@ -59,7 +72,7 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             padding: 5px;
             color: white;
             font-size: 12px;
@@ -70,11 +83,13 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
             font-size: 24px;
             font-weight: 600;
             margin-bottom: 10px;
+            color: black;
         }
 
         .profile-email {
             font-size: 16px;
             opacity: 0.9;
+            color: black;
         }
 
         .profile-stats {
@@ -89,7 +104,7 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
             padding: 20px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .stat-number {
@@ -108,7 +123,7 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
             background: white;
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .profile-section {
@@ -201,49 +216,116 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
             .profile-stats {
                 grid-template-columns: 1fr;
             }
-            
+
             .profile-container {
                 padding: 10px;
             }
-            
+
             .profile-header {
                 padding: 20px;
             }
         }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            position: relative;
+            background: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .profile-avatar:hover img {
+            opacity: 0.7;
+        }
+
+        .edit-avatar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .profile-avatar:hover .edit-avatar {
+            opacity: 1;
+        }
+
+        f.profile-avatar {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+        }
+
+        .profile-avatar .edit-avatar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 14px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .profile-avatar:hover .edit-avatar {
+            opacity: 1;
+        }
     </style>
 </head>
+
 <body>
     <nav>
-    <div class="back-button">
-   <a href="../index.php" class="back-btn">
-       <i class="fas fa-arrow-left"></i>
-       <span>Kembali</span>
-   </a>
-<div>
+        <div class="back-button">
+            <a href="../index.php" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Kembali</span>
+            </a>
+            <div>
     </nav>
     <div class="profile-container">
         <div class="profile-header">
             <div class="profile-avatar">
-                <img src="assets/images/default-avatar.png" alt="Profile Picture">
-                <div class="edit-avatar">
-                    <i class="fas fa-camera"></i> Ubah Foto
-                </div>
+                <img src="../images/user/default-photo.jpg" alt="Profile Picture" id="profileImage" class="rounded-circle border" style="width: 150px; height: 150px; object-fit: cover;">
             </div>
+
+
             <h1 class="profile-name"><?= htmlspecialchars($userName) ?></h1>
-            <p class="profile-email"><?= htmlspecialchars($userEmail) ?></p>
         </div>
 
         <div class="profile-stats">
             <div class="stat-card">
-                <div class="stat-number">12</div>
+                <div class="stat-number"><?= $dataHistoryUser[0]["total_pemesanan"] ?></div>
                 <div class="stat-label">Total Perjalanan</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">4.8</div>
+                <div class="stat-number"><?= $dataRatingUser[1] ?></div>
                 <div class="stat-label">Rating</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">5</div>
+                <div class="stat-number"><?= $dataRatingUser[0] ?></div>
                 <div class="stat-label">Review</div>
             </div>
         </div>
@@ -289,21 +371,18 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
                     </div>
                 </div>
             </div>
+            <div>
+                <!-- Form untuk upload gambar -->
+            <form action="../logic/update-profile-user.php" method="post" enctype="multipart/form-data" id="updateAvatarForm" class="text-center mt-4">
+                <div class="mb-3">
+                    <label for="avatarInput" class="form-label">Pilih Gambar Baru</label>
+                    <input type="file" id="avatarInput" class="form-control" accept="image/*" name="update-image">
+                </div>
+                <button type="submit" class="btn btn-primary">Upload Gambar</button>
+            </form>
+            </div>
         </div>
     </div>
-
-    <script>
-        // Handle avatar change
-        document.querySelector('.edit-avatar').addEventListener('click', function() {
-            // Implement avatar change functionality
-            alert('Fitur ubah foto profil akan segera hadir!');
-        });
-
-        // Handle profile edit
-        document.querySelector('.edit-btn').addEventListener('click', function() {
-            // Implement profile edit functionality
-            alert('Fitur edit profil akan segera hadir!');
-        });
-    </script>
 </body>
+
 </html>
