@@ -13,7 +13,7 @@
         <!-- Left Side - Travel Image -->
         <div class="left">
             <div class="left-content">
-                <h2>Discover Your Next Adventure</h2>
+                <h2>Jelajahi dunia bareng TravelKuy<span class="text-primary">.</span></h2>
                 <p>Join us and explore the world's most beautiful destinations. Your journey begins here.</p>
             </div>
         </div>

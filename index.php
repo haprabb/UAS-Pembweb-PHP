@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/style1.css">
     <style>
-        * {
+        /* * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -128,7 +128,7 @@
             padding: 15px 0;
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
-        }
+        } */
     </style>
 </head>
 
@@ -151,7 +151,7 @@
                 <!-- Menu Items -->
                 <ul class="navbar-nav align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#home">Home</a>
+                        <a class="nav-link" href="#home">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#destinations">Destinasi</a>
@@ -264,6 +264,11 @@
                 </div>
             </div>
         </div>
+        <div class="load-more-card">
+            <a href="destinasi.php" class="book-btn">Tampilkan Lebih</a>
+        </div>
+
+        </div>
     </section>
 
     <!-- Features Section -->
@@ -298,7 +303,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h4>TravelKuy</h4>
+                <h4>TravelKuy<span class="text-primary">.</span></h4>
                 <p>Jelajahi dunia bersama kami dengan pengalaman tak terlupakan</p>
                 <div class="social-links">
                     <a href="#"><i class="fab fa-facebook"></i></a>
