@@ -1,6 +1,3 @@
-<?php
-
-?>
 <!DOCTYPE html>
 <html>
 
@@ -11,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/style1.css">
     <style>
-        /* * {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -128,7 +125,7 @@
             padding: 15px 0;
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
-        } */
+        }
     </style>
 </head>
 
