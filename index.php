@@ -209,8 +209,7 @@
             <h1>Jelajahi Keindahan Dunia</h1>
             <p>Temukan pengalaman perjalanan tak terlupakan bersama kami</p>
             <div class="search-box">
-                <input type="text" class="search-input" placeholder="Mau kemana?">
-                <input type="date" class="search-input">
+                <input type="text" class="search-input" placeholder="Mau kemana hari ini?">
                 <button class="search-btn">Cari Sekarang</button>
             </div>
         </div>
