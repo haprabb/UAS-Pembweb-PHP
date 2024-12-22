@@ -1,6 +1,7 @@
 <?php
 
-function getRatingUser($connection, $id){
+function getRatingUser($connection, $id)
+{
     $con = $connection;
     $query = "SELECT rating FROM reviews where user_id='$id'";
     $result = $con->query($query);
@@ -8,13 +9,14 @@ function getRatingUser($connection, $id){
     $results = $result->fetchAll(PDO::FETCH_ASSOC);
     $totalRating = 0;
     $jumlahRating = count($results);
-    foreach($results as $result ){
+    foreach ($results as $result) {
         $totalRating += $result['rating'];
     }
 
-    $rating = $totalRating/$jumlahRating;
+    if ($jumlahRating == 0) {
+        $rating = 0;
+    } else {
+        $rating = $totalRating / $jumlahRating;
+    }
     return [$jumlahRating, $rating];
 }
-
-
-?>
