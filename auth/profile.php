@@ -29,6 +29,8 @@ $dataRatingUser = getRatingUser(getConnection(), $userID);
     <title>Profile - <?= $userName ?></title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="../styles/profile.css">
     <style>
         .profile-container {
@@ -83,7 +85,7 @@ $dataRatingUser = getRatingUser(getConnection(), $userID);
             margin-bottom: 10px;
             color: black;
         }
-        
+
         .profile-email {
             font-size: 16px;
             opacity: 0.9;
@@ -266,6 +268,31 @@ $dataRatingUser = getRatingUser(getConnection(), $userID);
         .profile-avatar:hover .edit-avatar {
             opacity: 1;
         }
+
+        f.profile-avatar {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+        }
+
+        .profile-avatar .edit-avatar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 14px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .profile-avatar:hover .edit-avatar {
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -281,27 +308,24 @@ $dataRatingUser = getRatingUser(getConnection(), $userID);
     <div class="profile-container">
         <div class="profile-header">
             <div class="profile-avatar">
-                <img src="../images/user/default-photo.jpg" alt="Profile Picture" id="profileImage">
-                <div class="edit-avatar">
-                    <i class="fas fa-camera"></i> Ubah Foto
-                </div>
-                <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                <img src="../images/user/default-photo.jpg" alt="Profile Picture" id="profileImage" class="rounded-circle border" style="width: 150px; height: 150px; object-fit: cover;">
             </div>
+
 
             <h1 class="profile-name"><?= htmlspecialchars($userName) ?></h1>
         </div>
 
         <div class="profile-stats">
             <div class="stat-card">
-                <div class="stat-number"><?= $dataHistoryUser[0]["total_pemesanan"]?></div>
+                <div class="stat-number"><?= $dataHistoryUser[0]["total_pemesanan"] ?></div>
                 <div class="stat-label">Total Perjalanan</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number"><?= $dataRatingUser[1]?></div>
+                <div class="stat-number"><?= $dataRatingUser[1] ?></div>
                 <div class="stat-label">Rating</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number"><?= $dataRatingUser[0]?></div>
+                <div class="stat-number"><?= $dataRatingUser[0] ?></div>
                 <div class="stat-label">Review</div>
             </div>
         </div>
@@ -347,25 +371,18 @@ $dataRatingUser = getRatingUser(getConnection(), $userID);
                     </div>
                 </div>
             </div>
+            <div>
+                <!-- Form untuk upload gambar -->
+            <form action="../logic/update-profile-user.php" method="post" enctype="multipart/form-data" id="updateAvatarForm" class="text-center mt-4">
+                <div class="mb-3">
+                    <label for="avatarInput" class="form-label">Pilih Gambar Baru</label>
+                    <input type="file" id="avatarInput" class="form-control" accept="image/*" name="update-image">
+                </div>
+                <button type="submit" class="btn btn-primary">Upload Gambar</button>
+            </form>
+            </div>
         </div>
     </div>
-
-    <script>
-        document.querySelector('.edit-avatar').addEventListener('click', function() {
-            document.getElementById('avatarInput').click();
-        });
-
-        document.getElementById('avatarInput').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('profileImage').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
 </body>
 
 </html>
