@@ -1,223 +1,216 @@
 <?php
 
+include "query-db/users.php";
+include "config/connection.php";
+
+$userID = $_COOKIE["logusid"];
+$gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
 ?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Destinasi Travel</title>
     <link rel="stylesheet" href="styles/destinasi.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style1.css">
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
-        body {
-            font-family: 'Poppins', Arial, sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #f4f4f4, #eaeaea);
-            color: #333;
-            overflow-x: hidden;
-        }
-
-        header {
-            background: linear-gradient(135deg, #1d3557, #457b9d);
-            color: #ffffff;
+        .navbar {
+            transition: all 0.4s ease;
             padding: 20px 0;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        header h1 {
-            font-weight: 600;
-            font-size: 2.5em;
+        .navbar-brand {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6366f1, #3b82f6, #2dd4bf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             letter-spacing: 1px;
         }
 
-        nav ul {
-            list-style: none;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-
-        nav ul li a {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: #a8dadc;
-        }
-
-        #destinasi {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 40px 20px;
-            gap: 30px;
-        }
-
-        .destinasi-card {
-            background: linear-gradient(135deg, #ffffff, #f8f9fa);
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            margin: 15px;
-            width: 300px;
-            text-align: center;
-            overflow: hidden;
-            transform: scale(1);
-            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+        .navbar-nav .nav-link {
             position: relative;
+            padding: 8px 20px;
+            margin: 0 5px;
+            font-weight: 500;
+            color: #374151;
+            transition: all 0.3s ease;
         }
 
-        .destinasi-card:hover {
-            transform: scale(1.08);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        .navbar-nav .nav-link:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2.5px;
+            background: linear-gradient(135deg, #6366f1, #3b82f6);
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
+            border-radius: 2px;
         }
 
-        .destinasi-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 5px solid #457b9d;
-            transition: transform 0.3s ease;
+        .navbar-nav .nav-link:hover {
+            color: #3b82f6;
         }
 
-        .destinasi-card:hover img {
+        .navbar-nav .nav-link:hover:before {
+            width: 70%;
+        }
+
+        .navbar-nav .nav-link.active:before {
+            width: 70%;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #6366f1, #3b82f6);
+            border: none;
+            padding: 10px 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .user-profile img {
+            border: 2px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+
+        .user-profile:hover img {
             transform: scale(1.1);
         }
 
-        .destinasi-card h2 {
-            margin: 15px 0;
-            font-size: 1.8em;
-            color: #1d3557;
-        }
-
-        .destinasi-card p {
-            padding: 0 20px;
-            margin-bottom: 15px;
-            color: #666;
-            font-size: 0.95em;
-        }
-
-        .destinasi-card button {
-            background: linear-gradient(135deg, #1d3557, #457b9d);
-            color: #ffffff;
+        .dropdown-menu {
             border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s, transform 0.2s;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
         }
 
-        .destinasi-card button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-            z-index: 1;
+        .dropdown-item {
+            padding: 10px 20px;
+            transition: all 0.3s ease;
         }
 
-        .destinasi-card button:hover::before {
-            transform: scaleX(1);
+        .dropdown-item:hover {
+            background: linear-gradient(135deg, #6366f1, #3b82f6);
+            color: white;
         }
 
-        .destinasi-card button:hover {
-            background: linear-gradient(135deg, #457b9d, #1d3557);
-            transform: translateY(-2px);
+        .dropdown-item:hover i {
+            color: white;
         }
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: linear-gradient(135deg, #1d3557, #457b9d);
-            color: #ffffff;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 0.9em;
-        }
-
-        @media (max-width: 768px) {
-            nav ul li {
-                display: block;
-                text-align: center;
-                margin: 10px 0;
+        @keyframes slideIn {
+            0% {
+                transform: translateY(1rem);
+                opacity: 0;
             }
 
-            .destinasi-card {
-                width: 90%;
+            100% {
+                transform: translateY(0rem);
+                opacity: 1;
             }
+        }
 
-            header h1 {
-                font-size: 2em;
-            }
+        .slideIn {
+            animation: slideIn 0.4s ease-in-out;
+        }
+
+        .navbar.scrolled {
+            padding: 15px 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
         }
     </style>
 </head>
+
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="#destinasi">Destinasi</a></li>
-                <li><a href="#features">Fitur</a></li>
-                <li><a href="#about">Tentang</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand" href="#">
+                TravelKuy<span class="text-primary">.</span>
+            </a>
 
-    <section id="destinasi">
-        <div class="destinasi-card">
-            <img src="https://source.unsplash.com/600x400/?beach" alt="Pantai">
-            <h2>Pantai Indah</h2>
-            <p>Temukan keindahan pantai dengan pasir putih dan air jernih. Nikmati berbagai aktivitas seperti snorkeling dan bersantai di tepi pantai.</p>
-            <button>Pesan Sekarang</button>
+            <!-- Toggler Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <!-- Menu Items -->
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="destinasi.php">Destinasi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Fitur</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">Tentang</a>
+                    </li>
+
+                    <!-- Login/Profile Section -->
+                    <?php if (!isset($_COOKIE['logus135'])): ?>
+                        <li class="nav-item ms-3">
+                            <a href="auth/login.php" class="btn btn-primary login-btn rounded-pill">
+                                <i class="fas fa-sign-in-alt me-2"></i>Login
+                            </a>
+                        </li>
+                    <?php else: ?>
+                        <li class="nav-item dropdown ms-3">
+                            <a class="nav-link dropdown-toggle user-profile d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="images/user/<?= $gambarUser ?>" alt="User Profile" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                <span class="d-none d-lg-inline fw-medium"><?php echo $_COOKIE['logusname']; ?></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end slideIn" aria-labelledby="userDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="auth/profile.php">
+                                        <i class="fas fa-user me-2 text-primary"></i>Profil Saya
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="auth/settings.php">
+                                        <i class="fas fa-cog me-2 text-primary"></i>Pengaturan
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-danger" href="logic/logout.php">
+                                        <i class="fas fa-sign-out-alt me-2"></i>Keluar
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </div>
         </div>
+    </nav>
 
-        <div class="destinasi-card">
-            <img src="https://source.unsplash.com/600x400/?mountain" alt="Gunung">
-            <h2>Gunung Menawan</h2>
-            <p>Jelajahi keindahan alam pegunungan dengan trekking yang menantang. Rasakan udara segar dan pemandangan yang menakjubkan.</p>
-            <button>Pesan Sekarang</button>
-        </div>
-
-        <div class="destinasi-card">
-            <img src="https://source.unsplash.com/600x400/?city" alt="Kota">
-            <h2>Kota Bersejarah</h2>
-            <p>Rasakan pesona kota bersejarah dengan arsitektur yang menakjubkan dan budaya yang kaya. Kunjungi museum dan tempat-tempat ikonik.</p>
-            <button>Pesan Sekarang</button>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2023 Travel Destinasi. Semua hak dilindungi.</p>
-    </footer>
 </body>
+
 </html>
