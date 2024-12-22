@@ -213,6 +213,14 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
     </style>
 </head>
 <body>
+    <nav>
+    <div class="back-button">
+   <a href="../index.php" class="back-btn">
+       <i class="fas fa-arrow-left"></i>
+       <span>Kembali</span>
+   </a>
+<div>
+    </nav>
     <div class="profile-container">
         <div class="profile-header">
             <div class="profile-avatar">
