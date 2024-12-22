@@ -1,0 +1,11 @@
+# Aktifkan URL Rewrite Engine
+RewriteEngine On
+
+# Hapus .php dari URL
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^\.]+)$ $1.php [L]
+
+# Jika URL mengandung .php, arahkan ke versi tanpa .php
+RewriteCond %{THE_REQUEST} \s([^.]+)\.php [NC]
+RewriteRule ^ %1 [R=301,L]
