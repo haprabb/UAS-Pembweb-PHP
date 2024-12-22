@@ -13,7 +13,7 @@ function getRatingUser($connection, $id){
     }
 
     $rating = $totalRating/$jumlahRating;
-    return $rating;
+    return [$jumlahRating, $rating];
 }
 
 

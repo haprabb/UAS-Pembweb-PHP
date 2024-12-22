@@ -297,11 +297,11 @@ $dataRatingUser = getRatingUser(getConnection(), $userID);
                 <div class="stat-label">Total Perjalanan</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number"><?= $dataRatingUser?></div>
+                <div class="stat-number"><?= $dataRatingUser[1]?></div>
                 <div class="stat-label">Rating</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">5</div>
+                <div class="stat-number"><?= $dataRatingUser[0]?></div>
                 <div class="stat-label">Review</div>
             </div>
         </div>
