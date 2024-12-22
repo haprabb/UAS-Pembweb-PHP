@@ -1,4 +1,10 @@
 <?php
+
+
+include "../query-db/history.php";
+include "../query-db/reviews.php";
+include "../config/connection.php";
+
 // Cek login user
 if (!isset($_COOKIE['logus135'])) {
     header("Location: auth/login.php");
@@ -8,6 +14,10 @@ if (!isset($_COOKIE['logus135'])) {
 // Ambil data user dari cookie
 $userName = $_COOKIE['logusname'];
 $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saat login
+$userID = $_COOKIE["logusid"];
+
+$dataHistoryUser = getHistoryUser(getConnection(), $userID);
+$dataRatingUser = getRatingUser(getConnection(), $userID);
 ?>
 
 <!DOCTYPE html>
@@ -71,11 +81,13 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
             font-size: 24px;
             font-weight: 600;
             margin-bottom: 10px;
+            color: black;
         }
-
+        
         .profile-email {
             font-size: 16px;
             opacity: 0.9;
+            color: black;
         }
 
         .profile-stats {
@@ -276,18 +288,16 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
                 <input type="file" id="avatarInput" accept="image/*" style="display: none;">
             </div>
 
-
             <h1 class="profile-name"><?= htmlspecialchars($userName) ?></h1>
-            <p class="profile-email"><?= htmlspecialchars($userEmail) ?></p>
         </div>
 
         <div class="profile-stats">
             <div class="stat-card">
-                <div class="stat-number">12</div>
+                <div class="stat-number"><?= $dataHistoryUser[0]["total_pemesanan"]?></div>
                 <div class="stat-label">Total Perjalanan</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">4.8</div>
+                <div class="stat-number"><?= $dataRatingUser?></div>
                 <div class="stat-label">Rating</div>
             </div>
             <div class="stat-card">
