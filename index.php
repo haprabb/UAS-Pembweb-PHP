@@ -70,11 +70,6 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="auth/settings.php">
-                                        <i class="fas fa-cog me-2 text-primary"></i>Pengaturan
-                                    </a>
-                                </li>
-                                <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>

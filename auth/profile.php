@@ -337,6 +337,12 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                     <li class="nav-item">
                         <a class="nav-link" href="#about">Tentang</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="../logic/logout.php" onclick="return confirm(`Yakin ingin logout?`)"><button class="btn btn-danger px-4 py-2 rounded-pill" id="logoutButton">
+                                <i class="fas fa-sign-out-alt me-2"></i>Logout
+                        </button></a>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -409,7 +415,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
             <div class="container text-center mt-5">
                 <!-- Tombol Update -->
                 <button type="button" class="btn btn-outline-light border border-secondary text-dark me-3" id="flip">
-                    Update
+                    Update Foto
                 </button>
 
                 <!-- Tombol Lihat History -->
