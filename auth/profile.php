@@ -12,6 +12,7 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +60,7 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             padding: 5px;
             color: white;
             font-size: 12px;
@@ -89,7 +90,7 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
             padding: 20px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .stat-number {
@@ -108,7 +109,7 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
             background: white;
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .profile-section {
@@ -201,34 +202,81 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
             .profile-stats {
                 grid-template-columns: 1fr;
             }
-            
+
             .profile-container {
                 padding: 10px;
             }
-            
+
             .profile-header {
                 padding: 20px;
             }
         }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            position: relative;
+            background: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .profile-avatar:hover img {
+            opacity: 0.7;
+        }
+
+        .edit-avatar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .profile-avatar:hover .edit-avatar {
+            opacity: 1;
+        }
     </style>
 </head>
+
 <body>
     <nav>
-    <div class="back-button">
-   <a href="../index.php" class="back-btn">
-       <i class="fas fa-arrow-left"></i>
-       <span>Kembali</span>
-   </a>
-<div>
+        <div class="back-button">
+            <a href="../index.php" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Kembali</span>
+            </a>
+            <div>
     </nav>
     <div class="profile-container">
         <div class="profile-header">
             <div class="profile-avatar">
-                <img src="assets/images/default-avatar.png" alt="Profile Picture">
+                <img src="../images/user/default-photo.jpg" alt="Profile Picture" id="profileImage">
                 <div class="edit-avatar">
                     <i class="fas fa-camera"></i> Ubah Foto
                 </div>
+                <input type="file" id="avatarInput" accept="image/*" style="display: none;">
             </div>
+
+
             <h1 class="profile-name"><?= htmlspecialchars($userName) ?></h1>
             <p class="profile-email"><?= htmlspecialchars($userEmail) ?></p>
         </div>
@@ -293,17 +341,21 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
     </div>
 
     <script>
-        // Handle avatar change
         document.querySelector('.edit-avatar').addEventListener('click', function() {
-            // Implement avatar change functionality
-            alert('Fitur ubah foto profil akan segera hadir!');
+            document.getElementById('avatarInput').click();
         });
 
-        // Handle profile edit
-        document.querySelector('.edit-btn').addEventListener('click', function() {
-            // Implement profile edit functionality
-            alert('Fitur edit profil akan segera hadir!');
+        document.getElementById('avatarInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('profileImage').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
         });
     </script>
 </body>
+
 </html>
