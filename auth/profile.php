@@ -7,8 +7,8 @@ include "../query-db/users.php";
 include "../config/connection.php";
 
 // Cek login user
-if (!isset($_COOKIE['logus135'])) {
-    header("Location: auth/login.php");
+if (!isset($_COOKIE['logus135']) && $_COOKIE["logusrole"] != "admin") {
+    header("Location: ../auth/login.php");
     exit();
 }
 
@@ -326,10 +326,10 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                 <!-- Menu Items -->
                 <ul class="navbar-nav align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">Home</a>
+                        <a class="nav-link" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="destinasi.php">Destinasi</a>
+                        <a class="nav-link" href="../destinasi.php">Destinasi</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#features">Fitur</a>
