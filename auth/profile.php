@@ -295,6 +295,10 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
         .profile-avatar:hover .edit-avatar {
             opacity: 1;
         }
+
+        #panel {
+            display: none;
+        }
     </style>
 </head>
 
@@ -312,9 +316,8 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
             <div class="profile-avatar">
                 <img src="../images/user/<?= $gambarUser ?>" alt="Profile Picture" id="profileImage" class="rounded-circle border" style="width: 150px; height: 150px; object-fit: cover;">
             </div>
-
-
             <h1 class="profile-name"><?= htmlspecialchars($userName) ?></h1>
+
         </div>
 
         <div class="profile-stats">
@@ -373,20 +376,39 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="container text-center mt-5">
+                <!-- Tombol Update -->
+                <button type="button" class="btn btn-outline-light border border-secondary text-dark me-3" id="flip">
+                    Update
+                </button>
+
+                <!-- Tombol Lihat History -->
+                <button type="button" class="btn btn-outline-light border border-secondary text-dark">
+                    Lihat History
+                </button>
+            </div>
+            <div id="panel">
                 <!-- Form untuk upload gambar -->
-            <form action="../logic/update-profile-user.php" method="post" enctype="multipart/form-data" id="updateAvatarForm" class="text-center mt-4">
-                <div class="mb-3">
-                    <input type="hidden" name="user-id" value="<?= $_COOKIE["logusid"] ?>">
-                    <input type="hidden" name="user-name" value="<?= $_COOKIE["logusname"] ?>">
-                    <label for="avatarInput" class="form-label">Pilih Gambar Baru</label>
-                    <input type="file" id="avatarInput" class="form-control" accept="image/*" name="update-image">
-                </div>
-                <button type="submit" class="btn btn-primary">Upload Gambar</button>
-            </form>
+                <form action="../logic/update-profile-user.php" method="post" enctype="multipart/form-data" id="updateAvatarForm" class="text-center mt-4">
+                    <div class="mb-3">
+                        <input type="hidden" name="user-id" value="<?= $_COOKIE["logusid"] ?>">
+                        <input type="hidden" name="user-name" value="<?= $_COOKIE["logusname"] ?>">
+                        <label for="avatarInput" class="form-label">Pilih Gambar Baru</label>
+                        <input type="file" id="avatarInput" class="form-control" accept="image/*" name="update-image">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload Gambar</button>
+                </form>
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#flip").click(function() {
+                $("#panel").slideToggle("slow");
+            });
+        });
+    </script>
 </body>
 
 </html>
