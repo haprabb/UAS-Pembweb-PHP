@@ -106,21 +106,6 @@ $gambarUser  = getImageUser(getConnection(), $userID)[0]['image'];
             color: #333;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #00ffbb;
-            color: white;
-            text-align: center;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: #45a049;
-        }
-
         footer {
             text-align: center;
             margin-top: 40px;
@@ -193,30 +178,89 @@ $gambarUser  = getImageUser(getConnection(), $userID)[0]['image'];
         </div>
     </nav>
 
-    <!-- Riwayat Pemesanan -->
-    <div class="history-container">
-        <h2 class="text-center p-4">Riwayat Pemesanan</h2>
+    <div class="history-container container py-5">
+        <h2 class="text-center mb-4">Riwayat Pemesanan</h2>
         <?php
         // Mendapatkan koneksi dan data riwayat pemesanan dari database
         $historyData = getHistoryPesananUser(getConnection(), $userID); // Asumsi `getHistory` sudah dibuat di `history.php`
 
         if (!empty($historyData)) {
+            echo '<div class="table-responsive">';
+            echo '<table class="table table-bordered table-striped table-hover align-middle">';
+            echo '<thead class="table-success text-center">';
+            echo '<tr>';
+            echo '<th>No</th>';
+            echo '<th>Kode Pemesanan</th>';
+            echo '<th>Asal</th>';
+            echo '<th>Tujuan</th>';
+            echo '<th>Waktu Keberangkatan</th>';
+            echo '<th>Status</th>';
+            echo '<th>Rating</th>';
+            echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
+
+            $no = 1;
             foreach ($historyData as $history) {
-                echo '<div class="history-item">';
-                echo '<div class="history-details">';
-                echo '<h3>Kode Pemesanan: ' . htmlspecialchars($history['booking_code']) . '</h3>';
-                echo '<p><strong>Asal:</strong> ' . htmlspecialchars($history['from_location']) . '</p>';
-                echo '<p><strong>Tujuan:</strong> ' . htmlspecialchars($history['to_location']) . '</p>';
-                echo '<p><strong>Waktu Keberangkatan:</strong> ' . htmlspecialchars($history['departure_time']) . '</p>';
-                echo '<p><strong>Status:</strong> ' . htmlspecialchars($history['status']) . '</p>';
-                echo '</div>';
-                echo '</div>';
+                echo '<tr>';
+                echo '<td class="text-center">' . $no++ . '</td>';
+                echo '<td>' . htmlspecialchars($history['booking_code']) . '</td>';
+                echo '<td>' . htmlspecialchars($history['from_location']) . '</td>';
+                echo '<td>' . htmlspecialchars($history['to_location']) . '</td>';
+                echo '<td>' . htmlspecialchars($history['departure_time']) . '</td>';
+                echo '<td class="text-center">';
+                echo '<span class="badge bg-' . (htmlspecialchars($history['status']) == 'confirmed' ? 'success' : 'warning') . '">';
+                echo htmlspecialchars(ucfirst($history['status']));
+                echo '</span>';
+                echo '</td>';
+                echo '<td class="text-center">';
+                echo '<button class="btn btn-sm btn-success rating-btn" data-id="' . htmlspecialchars($history['booking_code']) . '" data-bs-toggle="modal" data-bs-target="#ratingModal">';
+                echo '<i class="fas fa-star"></i> Beri Rating';
+                echo '</button>';
+                echo '</td>';
+                echo '</tr>';
             }
+
+            echo '</tbody>';
+            echo '</table>';
+            echo '</div>';
         } else {
-            echo '<p class="text-center p-4">Tidak ada riwayat pemesanan.</p>';
+            echo '<p class="text-center text-muted">Tidak ada riwayat pemesanan.</p>';
         }
         ?>
     </div>
+
+    <!-- Modal Rating -->
+    <div class="modal fade" id="ratingModal" tabindex="-1" aria-labelledby="ratingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ratingModalLabel">Beri Penilaian</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="ratingForm">
+                        <input type="hidden" id="bookingCode" name="booking_code" value="">
+                        <p class="text-center">Silakan beri penilaian untuk pemesanan ini:</p>
+                        <div class="d-flex justify-content-center gap-2">
+                            <button type="button" class="btn btn-outline-warning rating-value" data-value="1">1</button>
+                            <button type="button" class="btn btn-outline-warning rating-value" data-value="2">2</button>
+                            <button type="button" class="btn btn-outline-warning rating-value" data-value="3">3</button>
+                            <button type="button" class="btn btn-outline-warning rating-value" data-value="4">4</button>
+                            <button type="button" class="btn btn-outline-warning rating-value" data-value="5">5</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" id="submitRating">Kirim Rating</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
 
     <footer>
