@@ -94,7 +94,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                 <!-- Anggota Tim -->
                 <div class="col-md-4 mb-4">
                     <div class="card border-0 shadow">
-                        <img src="images/team/member1.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 1" style="width: 150px; height: 150px; object-fit: cover;">
+                        <img src="images/owner/diaz.jpeg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 1" style="width: 150px; height: 150px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">Diaz Rangga Saksena</h5>
                             <p class="card-text">UI/UX Designer</p>
@@ -105,7 +105,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
 
                 <div class="col-md-4 mb-4">
                     <div class="card border-0 shadow">
-                        <img src="images/team/member2.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 2" style="width: 150px; height: 150px; object-fit: cover;">
+                        <img src="images/owner/Cahyo.jpeg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 2" style="width: 150px; height: 150px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">Lasminanto Nur Cahyo</h5>
                             <p class="card-text">Backend Developer</p>
@@ -116,7 +116,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
 
                 <div class="col-md-4 mb-4">
                     <div class="card border-0 shadow">
-                        <img src="images/team/member3.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 3" style="width: 150px; height: 150px; object-fit: cover;">
+                        <img src="images/owner/wildan.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 3" style="width: 150px; height: 150px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">Muhammad Wildan Azizi</h5>
                             <p class="card-text">Frontend Developer</p>
@@ -138,7 +138,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
 
                 <div class="col-md-6 mb-4">
                     <div class="card border-0 shadow">
-                        <img src="images/team/member5.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 5" style="width: 150px; height: 150px; object-fit: cover;">
+                        <img src="images/owner/haprab.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 5" style="width: 150px; height: 150px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">Rizqi Satya Haprabu</h5>
                             <p class="card-text">Project Manager</p>

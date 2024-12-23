@@ -399,13 +399,6 @@ $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
                     Riwayat Pemesanan
                 </h2>
                 <?php if (count($duaHistoryUser) == 0) { ?>
-                    <div class="booking-history">
-                        <div class="booking-card">
-                            <div class="booking-header">
-                                <p>Riwayat Kosong</p>
-                            </div>
-                        </div>
-                    </div>
                 <?php } else { ?>
                     <div class="booking-history">
                         <div class="booking-card">

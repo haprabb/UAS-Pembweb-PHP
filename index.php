@@ -19,6 +19,51 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/style1.css">
     <link rel="stylesheet" href="styles/navbar.css">
+    <style>
+        .hero-btn {
+            font-size: 1.5rem !important;
+            font-weight: 700 !important;
+            padding: 1rem 3rem !important;
+            background: linear-gradient(135deg, #2196F3, #4CAF50) !important;
+            border: none !important;
+            box-shadow: 0 10px 30px rgba(33, 150, 243, 0.4) !important;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+        }
+        
+        .hero-btn:hover {
+            transform: translateY(-5px) scale(1.05) !important;
+            box-shadow: 0 15px 40px rgba(33, 150, 243, 0.6) !important;
+        }
+        
+        .hero-link {
+            font-size: 1.2rem !important;
+            font-weight: 500 !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3) !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+        }
+        
+        .hero-link:hover {
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4) !important;
+            letter-spacing: 1px !important;
+        }
+        
+        .hero-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: #fff;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .hero-link:hover::after {
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -92,11 +137,16 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
         <div class="hero-content">
             <h1>Jelajahi Keindahan Dunia</h1>
             <div class="container mt-5">
-                <div class="search-box">
-                    <input type="text" id="liveSearch" class="search-input" placeholder="Mau kemana hari ini?">
+                <div class="d-flex flex-column align-items-center">
+                    <a href="ticketing_system/index.php" class="btn btn-primary rounded-pill hero-btn">
+                        <i class="fas fa-plane-departure me-2"></i>Ayo Mulai Perjalanan
+                    </a>
+                    <a href="ticketing_system/index.php" class="text-white mt-4 hero-link">
+                        Pesan Tiket Sekarang <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
                 </div>
-                <div id="dropdownResults" class="list-group mt-2"></div>
             </div>
+        </div>
     </section>
 
     <!-- Popular Destinations -->
@@ -117,7 +167,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                     <h3>Bali</h3>
                     <p>Nikmati keindahan pantai dan budaya yang memukau di Pulau Dewata</p>
                     <span class="price">Mulai Rp 5.000.000</span>
-                    <a href="#" class="book-btn">Pesan Sekarang</a>
+                    <a href="ticketing_system/index.php" class="book-btn">Pesan Sekarang</a>
                 </div>
             </div>
 
@@ -130,7 +180,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                     <h3>Raja Ampat</h3>
                     <p>Jelajahi surga bawah laut dengan keindahan terumbu karang</p>
                     <span class="price">Mulai Rp 8.000.000</span>
-                    <a href="#" class="book-btn">Pesan Sekarang</a>
+                    <a href="ticketing_system/index.php" class="book-btn">Pesan Sekarang</a>
                 </div>
             </div>
 
@@ -143,7 +193,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                     <h3>Labuan Bajo</h3>
                     <p>Temui komodo dan nikmati pemandangan laut yang memukau</p>
                     <span class="price">Mulai Rp 6.500.000</span>
-                    <a href="#" class="book-btn">Pesan Sekarang</a>
+                    <a href="ticketing_system/index.php" class="book-btn">Pesan Sekarang</a>
                 </div>
             </div>
         </div>

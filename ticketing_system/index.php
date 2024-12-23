@@ -12,9 +12,229 @@
     <link rel="stylesheet" href="../styles/navbar.css">
 
     <style>
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #FFC107;
+            --success-color: #4CAF50;
+            --danger-color: #F44336;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --border-radius: 8px;
+            --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
         .navbar {
             background-color: #ffffff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow);
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        .main-content {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            background-color: darken(var(--primary-color), 10%);
+            transform: translateY(-2px);
+        }
+
+        .form-control {
+            border-radius: var(--border-radius);
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(33, 150, 243, 0.25);
+        }
+
+        .card {
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: none;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .table {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .table th {
+            background-color: var(--light-bg);
+            font-weight: 600;
+            border: none;
+        }
+
+        .table td {
+            vertical-align: middle;
+            border-color: #eee;
+        }
+
+        /* Modal Kustom */
+        .modal-custom {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 25px rgba(0,0,0,0.15);
+            z-index: 1000;
+            width: 90%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(3px);
+            z-index: 999;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 1.5rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--danger-color);
+            transform: rotate(90deg);
+        }
+
+        .clickable-row {
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .clickable-row:hover {
+            background-color: var(--light-bg);
+            transform: scale(1.01);
+        }
+
+        /* Warna untuk jenis transportasi */
+        .ka-row {
+            background-color: rgba(33, 150, 243, 0.1) !important;
+        }
+        
+        .ship-row {
+            background-color: rgba(76, 175, 80, 0.1) !important;  
+        }
+        
+        .plane-row {
+            background-color: rgba(255, 193, 7, 0.1) !important;
+        }
+
+        .transport-icon {
+            margin-right: 0.5rem;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .ka-icon {
+            color: var(--primary-color);
+        }
+
+        .ship-icon {
+            color: var(--success-color);
+        }
+
+        .plane-icon {
+            color: var(--secondary-color);
+        }
+
+        /* Animasi */
+        @keyframes slideIn {
+            from {
+                transform: translateY(-10px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .slideIn {
+            animation: slideIn 0.3s ease forwards;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .main-content {
+                padding-top: 80px;
+            }
+
+            .modal-custom {
+                width: 95%;
+                padding: 1rem;
+            }
         }
     </style>
 </head>
@@ -96,8 +316,64 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container main-content">
         <h1 class="mb-4">Cari dan Beli Tiket</h1>
+
+        <!-- Tombol untuk melihat daftar tiket -->
+        <button class="btn btn-info mb-4" onclick="showTicketList()">
+            <i class="fas fa-list me-2"></i>Lihat Daftar Tiket Tersedia
+        </button>
+
+        <!-- Modal Daftar Tiket -->
+        <div id="ticketListModal" class="modal-custom">
+            <span class="close-modal" onclick="closeTicketList()">&times;</span>
+            <h3 class="mb-4">Daftar Tiket Tersedia</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nama</th>
+                            <th>Keberangkatan</th>
+                            <th>Tujuan</th>
+                            <th>Harga</th>
+                            <th>Kursi Tersedia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                        $conn = getConnection();
+                        $query = "SELECT * FROM tickets";
+                        $stmt = $conn->query($query);
+                        while($row = $stmt->fetch(PDO::FETCH_ASSOC)): 
+                            $transportClass = '';
+                            $transportIcon = '';
+                            
+                            if (stripos($row['name'], 'KA') !== false) {
+                                $transportClass = 'ka-row';
+                                $transportIcon = '<i class="fas fa-train transport-icon ka-icon"></i>';
+                            } elseif (stripos($row['name'], 'SHIP') !== false) {
+                                $transportClass = 'ship-row';
+                                $transportIcon = '<i class="fas fa-ship transport-icon ship-icon"></i>';
+                            } elseif (stripos($row['name'], 'PLANE') !== false) {
+                                $transportClass = 'plane-row';
+                                $transportIcon = '<i class="fas fa-plane transport-icon plane-icon"></i>';
+                            }
+                        ?>
+                        <tr class="clickable-row <?php echo $transportClass; ?>" onclick="fillSearchForm('<?php echo $row['departure']; ?>', '<?php echo $row['destination']; ?>')">
+                            <td><?php echo $row['id']; ?></td>
+                            <td><?php echo $transportIcon . $row['name']; ?></td>
+                            <td><?php echo $row['departure']; ?></td>
+                            <td><?php echo $row['destination']; ?></td>
+                            <td>Rp <?php echo number_format($row['price'], 0, ',', '.'); ?></td>
+                            <td><?php echo $row['seat_available']; ?></td>
+                        </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="modalBackdrop" class="modal-backdrop"></div>
         
         <!-- Search Form -->
         <form id="ticketForm" class="mb-5">
@@ -213,6 +489,23 @@
     </div>
 
     <script>
+        function showTicketList() {
+            document.getElementById('ticketListModal').style.display = 'block';
+            document.getElementById('modalBackdrop').style.display = 'block';
+        }
+
+        function closeTicketList() {
+            document.getElementById('ticketListModal').style.display = 'none';
+            document.getElementById('modalBackdrop').style.display = 'none';
+        }
+
+        function fillSearchForm(departure, destination) {
+            document.getElementById('from').value = departure;
+            document.getElementById('to').value = destination;
+            closeTicketList();
+            document.getElementById('ticketForm').dispatchEvent(new Event('submit'));
+        }
+
         document.getElementById('ticketForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const from = document.getElementById('from').value.trim();
@@ -290,6 +583,7 @@
                     if (data.status === 'success') {
                         document.getElementById('receipt').style.display = 'block';
                         document.getElementById('buyButton').disabled = true;
+                        document.getElementById('receipt').scrollIntoView({ behavior: 'smooth' });
                         alert('Tiket berhasil dibeli!');
                     } else {
                         alert('Terjadi kesalahan saat membeli tiket.');

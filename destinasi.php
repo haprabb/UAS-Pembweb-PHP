@@ -228,7 +228,7 @@ $gambarUser  = getImageUser (getConnection(), $userID)[0]['image'];
                     echo '            <h3>' . $destination["name"] . '</h3>';
                     echo '            <p>' . $destination["description"] . '</p>';
                     echo '            <span class="price">' . $destination["price"] . '</span>';
-                    echo '            <a href="#" class="btn btn-primary">Pesan Sekarang</a>';
+                    echo '            <a href="ticketing_system/index.php" class="btn btn-primary">Pesan Sekarang</a>';
                     echo '        </div>';
                     echo '    </div>';
                     echo '</div>';
