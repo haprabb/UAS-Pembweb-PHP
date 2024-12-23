@@ -4,25 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TravelKuy - Pembelian Tiket</title>
-    
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles/style1.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles/style1.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
 
     <style>
-       
+        .navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
-
 <body>
+    <?php
+        include "../config/connection.php";
+        include "../query-db/users.php";
+        
+        $userID = $_COOKIE["logusid"];
+        $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
+    ?>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <!-- Brand -->
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="../index.php">
                 TravelKuy<span class="text-primary">.</span>
             </a>
 
@@ -36,39 +44,39 @@
                 <!-- Menu Items -->
                 <ul class="navbar-nav align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#home">Home</a>
+                        <a class="nav-link" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#destinations">Destinasi</a>
+                        <a class="nav-link" href="../destinasi.php">Destinasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#features">Fitur</a>
+                        <a class="nav-link" href="../index.php#features">Fitur</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">Tentang</a>
+                        <a class="nav-link" href="../about.php">Tentang</a>
                     </li>
 
                     <!-- Login/Profile Section -->
                     <?php if (!isset($_COOKIE['logus135'])): ?>
                         <li class="nav-item ms-3">
-                            <a href="auth/login.php" class="btn btn-primary login-btn rounded-pill">
+                            <a href="../auth/login.php" class="btn btn-primary login-btn rounded-pill">
                                 <i class="fas fa-sign-in-alt me-2"></i>Login
                             </a>
                         </li>
                     <?php else: ?>
                         <li class="nav-item dropdown ms-3">
                             <a class="nav-link dropdown-toggle user-profile d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="images/user/default-photo.jpg" alt="User Profile" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                <img src="../images/user/<?php echo $gambarUser; ?>" alt="User Profile" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
                                 <span class="d-none d-lg-inline fw-medium"><?php echo $_COOKIE['logusname']; ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end slideIn" aria-labelledby="userDropdown">
                                 <li>
-                                    <a class="dropdown-item" href="auth/profile.php">
+                                    <a class="dropdown-item" href="../auth/profile.php">
                                         <i class="fas fa-user me-2 text-primary"></i>Profil Saya
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="auth/settings.php">
+                                    <a class="dropdown-item" href="../auth/settings.php">
                                         <i class="fas fa-cog me-2 text-primary"></i>Pengaturan
                                     </a>
                                 </li>
@@ -76,7 +84,7 @@
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
-                                    <a class="dropdown-item text-danger" href="logic/logout.php">
+                                    <a class="dropdown-item text-danger" href="../logic/logout.php">
                                         <i class="fas fa-sign-out-alt me-2"></i>Keluar
                                     </a>
                                 </li>
@@ -99,11 +107,23 @@
                         <label for="from">Dari:</label>
                         <select id="from" name="from" class="form-control" required>
                             <option value="">Pilih kota keberangkatan</option>
-                            <option value="Jakarta">Jakarta</option>
-                            <option value="Surabaya">Surabaya</option>
-                            <option value="Bandung">Bandung</option>
                             <option value="Yogyakarta">Yogyakarta</option>
+                            <option value="Jakarta">Jakarta</option>
+                            <option value="Bandung">Bandung</option>
                             <option value="Semarang">Semarang</option>
+                            <option value="Surakarta">Surakarta</option>
+                            <option value="Surabaya">Surabaya</option>
+                            <option value="Bali">Bali</option>
+                            <option value="Raja Ampat">Raja Ampat</option>
+                            <option value="Nusa Penida">Nusa Penida</option>
+                            <option value="Komodo Island">Komodo Island</option>
+                            <option value="Belitung">Belitung</option>
+                            <option value="Derawan">Derawan</option>
+                            <option value="Bunaken">Bunaken</option>
+                            <option value="Gili Trawangan">Gili Trawangan</option>
+                            <option value="Karimunjawa">Karimunjawa</option>
+                            <option value="Wakatobi">Wakatobi</option>
+                            <option value="Togean Islands">Togean Islands</option>
                         </select>
                     </div>
                 </div>
@@ -112,11 +132,23 @@
                         <label for="to">Ke:</label>
                         <select id="to" name="to" class="form-control" required>
                             <option value="">Pilih kota tujuan</option>
-                            <option value="Jakarta">Jakarta</option>
-                            <option value="Surabaya">Surabaya</option>
-                            <option value="Bandung">Bandung</option>
                             <option value="Yogyakarta">Yogyakarta</option>
+                            <option value="Jakarta">Jakarta</option>
+                            <option value="Bandung">Bandung</option>
                             <option value="Semarang">Semarang</option>
+                            <option value="Surakarta">Surakarta</option>
+                            <option value="Surabaya">Surabaya</option>
+                            <option value="Bali">Bali</option>
+                            <option value="Raja Ampat">Raja Ampat</option>
+                            <option value="Nusa Penida">Nusa Penida</option>
+                            <option value="Komodo Island">Komodo Island</option>
+                            <option value="Belitung">Belitung</option>
+                            <option value="Derawan">Derawan</option>
+                            <option value="Bunaken">Bunaken</option>
+                            <option value="Gili Trawangan">Gili Trawangan</option>
+                            <option value="Karimunjawa">Karimunjawa</option>
+                            <option value="Wakatobi">Wakatobi</option>
+                            <option value="Togean Islands">Togean Islands</option>
                         </select>
                     </div>
                 </div>
@@ -162,7 +194,7 @@
                         <option value="">-- Pilih Tiket --</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Beli Tiket</button>
+                <button type="submit" class="btn btn-primary w-100" id="buyButton">Beli Tiket</button>
             </form>
         </div>
 
@@ -175,6 +207,7 @@
                 <p><strong>Ke:</strong> <span id="destinationCity"></span></p>
                 <p><strong>Harga:</strong> <span id="ticketPrice"></span></p>
                 <p><strong>Sisa Kursi:</strong> <span id="remainingSeats"></span></p>
+                <a href="../auth/profile.php" class="btn btn-primary w-100">Lihat Detail</a>
             </div>
         </div>
     </div>
@@ -256,6 +289,7 @@
                 .then(data => {
                     if (data.status === 'success') {
                         document.getElementById('receipt').style.display = 'block';
+                        document.getElementById('buyButton').disabled = true;
                         alert('Tiket berhasil dibeli!');
                     } else {
                         alert('Terjadi kesalahan saat membeli tiket.');

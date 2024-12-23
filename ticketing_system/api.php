@@ -27,11 +27,12 @@ if (isset($_GET['from']) && isset($_GET['to'])) {
 if (isset($_POST['ticket_id']) && isset($_POST['user_name'])) {
     $ticket_id = $_POST['ticket_id'];
     $user_name = $_POST['user_name'];
+    $purchase_date = date('Y-m-d H:i:s'); // Menambahkan tanggal dan waktu pembelian
 
     // Menambahkan pembelian ke tabel purchases
-    $query = "INSERT INTO purchases (ticket_id, user_name, quantity) VALUES (?, ?, 1)";
+    $query = "INSERT INTO purchases (ticket_id, user_name, quantity, purchase_date) VALUES (?, ?, 1, ?)";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("is", $ticket_id, $user_name);
+    $stmt->bind_param("iss", $ticket_id, $user_name, $purchase_date);
     $stmt->execute();
 
     // Update kursi yang tersedia setelah pembelian

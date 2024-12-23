@@ -353,7 +353,15 @@ $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
 
         <div class="profile-stats">
             <div class="stat-card">
-                <div class="stat-number"><?= $dataHistoryUser[0]["total_pemesanan"] ?></div>
+                <div class="stat-number">
+                    <?php
+                    $pdo = getConnection();
+                    $query = "SELECT COUNT(*) as total FROM purchases";
+                    $stmt = $pdo->query($query);
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    echo $result['total'];
+                    ?>
+                </div>
                 <div class="stat-label">Total Perjalanan</div>
             </div>
             <div class="stat-card">
@@ -409,20 +417,45 @@ $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
                         </div>
                     </div>
                 <?php } ?>
+
+                <h3 class="mt-4">Semua Riwayat Pembelian</h3>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Ticket ID</th>
+                                <th>Nama Pengguna</th>
+                                <th>Tanggal Pembelian</th>
+                                <th>Jumlah</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $pdo = getConnection();
+                            $query = "SELECT * FROM purchases";
+                            $stmt = $pdo->query($query);
+                            while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                echo "<tr>";
+                                echo "<td>" . $row['id'] . "</td>";
+                                echo "<td>" . $row['ticket_id'] . "</td>";
+                                echo "<td>" . $row['user_name'] . "</td>";
+                                echo "<td>" . date('d-m-Y', strtotime($row['purchase_date'])) . "</td>";
+                                echo "<td>" . $row['quantity'] . "</td>";
+                                echo "<td><a href='print.php?id=" . $row['id'] . "' class='btn btn-outline-light border border-secondary text-dark btn-sm'>Lihat History</a></td>";
+                                echo "</tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="container text-center mt-5">
                 <!-- Tombol Update -->
                 <button type="button" class="btn btn-outline-light border border-secondary text-dark me-3" id="flip">
                     Update Foto
                 </button>
-
-                <!-- Tombol Lihat History -->
-                <a href="history-user.php">
-                    <button type="button" class="btn btn-outline-light border border-secondary text-dark">
-                        Lihat History
-                    </button>
-                </a>
-
             </div>
             <div id="panel">
                 <!-- Form untuk upload gambar -->
