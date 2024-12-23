@@ -6,34 +6,20 @@ include "config/connection.php";
 $userID = $_COOKIE["logusid"];
 $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
 ?>
+
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Destinasi Travel</title>
+    <title>Tentang Kami - TravelKuy</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/style1.css">
     <link rel="stylesheet" href="styles/navbar.css">
-    <style>
-        .card {
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .card-body {
-            text-align: center;
-        }
-    </style>
 </head>
 
 <body>
@@ -57,13 +43,13 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                         <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="destinasi.php">Destinasi</a>
+                        <a class="nav-link" href="destinasi.php">Destinasi</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#features">Fitur</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.php">Tentang</a>
+                        <a class="nav-link active" href="about.php">Tentang</a>
                     </li>
 
                     <!-- Login/Profile Section -->
@@ -100,14 +86,69 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
             </div>
         </div>
     </nav>
-    <div class="container mt-5">
-        <h2 class="mb-4 text-center">Daftar Destinasi</h2>
-        <div id="destinationCards" class="row">
-            <!-- Kartu destinasi akan dimuat di sini oleh JavaScript -->
-        </div>
-    </div>
+    <section class="pt-5" style="margin-top: 100px;">
+        <div class="container text-center">
+            <h1 class="mb-4">Tentang Kami</h1>
+            <p class="mb-5">Kami adalah tim kreatif yang bersemangat untuk menyediakan pengalaman terbaik dalam merencanakan perjalanan Anda.</p>
+            <div class="row">
+                <!-- Anggota Tim -->
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow">
+                        <img src="images/team/member1.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 1" style="width: 150px; height: 150px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Diaz Rangga Saksena</h5>
+                            <p class="card-text">UI/UX Designer</p>
+                            <p><i class="fas fa-envelope me-2"></i>rizky@travelkuy.com</p>
+                        </div>
+                    </div>
+                </div>
 
-    <script src="scripts/ajax2.js"></script>
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow">
+                        <img src="images/team/member2.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 2" style="width: 150px; height: 150px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Lasminanto Nur Cahyo</h5>
+                            <p class="card-text">Backend Developer</p>
+                            <p><i class="fas fa-envelope me-2"></i>dewi@travelkuy.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow">
+                        <img src="images/team/member3.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 3" style="width: 150px; height: 150px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Muhammad Wildan Azizi</h5>
+                            <p class="card-text">Frontend Developer</p>
+                            <p><i class="fas fa-envelope me-2"></i>budi@travelkuy.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card border-0 shadow">
+                        <img src="images/team/member4.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 4" style="width: 150px; height: 150px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Ridwanul Bakhri</h5>
+                            <p class="card-text">Marketing Specialist</p>
+                            <p><i class="fas fa-envelope me-2"></i>ridwanulbakhri@student.uns.ac.id</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card border-0 shadow">
+                        <img src="images/team/member5.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 5" style="width: 150px; height: 150px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Rizqi Satya Haprabu</h5>
+                            <p class="card-text">Project Manager</p>
+                            <p><i class="fas fa-envelope me-2"></i>andi@travelkuy.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
