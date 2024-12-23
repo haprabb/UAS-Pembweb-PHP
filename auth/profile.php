@@ -17,9 +17,10 @@ $userName = $_COOKIE['logusname'];
 $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saat login
 $userID = $_COOKIE["logusid"];
 
-$dataHistoryUser = getHistoryUser(getConnection(), $userID);
+$dataHistoryUser = getJumlahHistoryUser(getConnection(), $userID);
 $dataRatingUser = getRatingUser(getConnection(), $userID);
 $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
+$duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
 ?>
 
 <!DOCTYPE html>
@@ -340,7 +341,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                     <li class="nav-item">
                         <a href="../logic/logout.php" onclick="return confirm(`Yakin ingin logout?`)"><button class="btn btn-danger px-4 py-2 rounded-pill" id="logoutButton">
                                 <i class="fas fa-sign-out-alt me-2"></i>Logout
-                        </button></a>
+                            </button></a>
                     </li>
 
                 </ul>
@@ -395,22 +396,32 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                     <i class="fas fa-ticket-alt"></i>
                     Riwayat Pemesanan
                 </h2>
-                <div class="booking-history">
-                    <div class="booking-card">
-                        <div class="booking-header">
-                            <strong>Jakarta → Bali</strong>
-                            <span class="booking-status status-paid">Dibayar</span>
+                <?php if (count($duaHistoryUser) == 0) { ?>
+                    <div class="booking-history">
+                        <div class="booking-card">
+                            <div class="booking-header">
+                                <p>Riwayat Kosong</p>
+                            </div>
                         </div>
-                        <div class="booking-date">20 Mar 2024</div>
                     </div>
-                    <div class="booking-card">
-                        <div class="booking-header">
-                            <strong>Bandung → Yogyakarta</strong>
-                            <span class="booking-status status-pending">Menunggu Pembayaran</span>
+                <?php } else { ?>
+                    <div class="booking-history">
+                        <div class="booking-card">
+                            <div class="booking-header">
+                                <strong>Jakarta → Bali</strong>
+                                <span class="booking-status status-paid">Dibayar</span>
+                            </div>
+                            <div class="booking-date">20 Mar 2024</div>
                         </div>
-                        <div class="booking-date">25 Mar 2024</div>
+                        <div class="booking-card">
+                            <div class="booking-header">
+                                <strong>Bandung → Yogyakarta</strong>
+                                <span class="booking-status status-pending">Menunggu Pembayaran</span>
+                            </div>
+                            <div class="booking-date">25 Mar 2024</div>
+                        </div>
                     </div>
-                </div>
+                <?php } ?>
             </div>
             <div class="container text-center mt-5">
                 <!-- Tombol Update -->

@@ -1,9 +1,10 @@
 <?php
 include "../query-db/users.php";
+include "../query-db/history.php";
 include "../config/connection.php";
 
 $userID = $_COOKIE["logusid"];
-$gambarUser  = getImageUser (getConnection(), $userID)[0]['image'];
+$gambarUser  = getImageUser(getConnection(), $userID)[0]['image'];
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +26,8 @@ $gambarUser  = getImageUser (getConnection(), $userID)[0]['image'];
 
         body {
             background-color: #f1f1f1;
-            padding: 60px 20px; /* Padding untuk menghindari navbar */
+            padding: 60px 20px;
+            /* Padding untuk menghindari navbar */
             color: #333;
         }
 
@@ -66,7 +68,8 @@ $gambarUser  = getImageUser (getConnection(), $userID)[0]['image'];
 
         .history-container {
             max-width: 900px;
-            margin: 80px auto; /* Margin atas untuk menghindari navbar */
+            margin: 80px auto;
+            /* Margin atas untuk menghindari navbar */
             background: #fff;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             border-radius: 15px;
@@ -192,39 +195,29 @@ $gambarUser  = getImageUser (getConnection(), $userID)[0]['image'];
 
     <!-- Riwayat Pemesanan -->
     <div class="history-container">
+        <h2 class="text-center p-4">Riwayat Pemesanan</h2>
         <?php
-        // Koneksi ke database
-        $conn = new mysqli('localhost', 'root', '', 'uas_pemweb');
+        // Mendapatkan koneksi dan data riwayat pemesanan dari database
+        $historyData = getHistoryPesananUser(getConnection(), $userID); // Asumsi `getHistory` sudah dibuat di `history.php`
 
-        // Cek koneksi
-        if ($conn->connect_error) {
-            die("Koneksi gagal: " . $conn->connect_error);
-        }
-
-        // Query untuk mendapatkan data
-        $sql = "SELECT * FROM history WHERE user_id = '$userID' ORDER BY departure_time DESC";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            // Looping data
-            while ($row = $result->fetch_assoc()) {
-                echo "<div class='history-item'>";
-                echo "<div class='history-details'>";
-                echo "<h3>" . htmlspecialchars($row['from_location']) . " ke " . htmlspecialchars($row['to_location']) . "</h3>";
-                echo "<p><strong>Kode Pemesanan:</strong> " . htmlspecialchars($row['booking_code']) . "</p>";
-                echo "<p><strong>Waktu Keberangkatan:</strong> " . date("d M Y, H:i", strtotime($row['departure_time'])) . "</p>";
-                echo "<p><strong>Status:</strong> " . ucfirst(htmlspecialchars($row['status'])) . "</p>";
-                echo "<a href='#' class='btn'>Lihat Detail</a>";
-                echo "</div>";
-                echo "</div>";
+        if (!empty($historyData)) {
+            foreach ($historyData as $history) {
+                echo '<div class="history-item">';
+                echo '<div class="history-details">';
+                echo '<h3>Kode Pemesanan: ' . htmlspecialchars($history['booking_code']) . '</h3>';
+                echo '<p><strong>Asal:</strong> ' . htmlspecialchars($history['from_location']) . '</p>';
+                echo '<p><strong>Tujuan:</strong> ' . htmlspecialchars($history['to_location']) . '</p>';
+                echo '<p><strong>Waktu Keberangkatan:</strong> ' . htmlspecialchars($history['departure_time']) . '</p>';
+                echo '<p><strong>Status:</strong> ' . htmlspecialchars($history['status']) . '</p>';
+                echo '</div>';
+                echo '</div>';
             }
         } else {
-            echo "<p class='text-center'>Tidak ada riwayat pemesanan.</p>";
+            echo '<p class="text-center p-4">Tidak ada riwayat pemesanan.</p>';
         }
-
-        $conn->close();
         ?>
     </div>
+
 
     <footer>
         <p>&copy; 2024 Travel Destinasi. Semua hak dilindungi. <a href="#">Kebijakan Privasi</a></p>
