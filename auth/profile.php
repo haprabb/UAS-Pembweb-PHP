@@ -408,17 +408,10 @@ $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
                     <div class="booking-history">
                         <div class="booking-card">
                             <div class="booking-header">
-                                <strong>Jakarta → Bali</strong>
-                                <span class="booking-status status-paid">Dibayar</span>
+                                <strong><?= $duaHistoryUser[0]['from_location'] ?> → <?= $duaHistoryUser[0]['to_location'] ?></strong>
+                                <span class="booking-status status-paid"><?= $duaHistoryUser[0]['status']?></span>
                             </div>
-                            <div class="booking-date">20 Mar 2024</div>
-                        </div>
-                        <div class="booking-card">
-                            <div class="booking-header">
-                                <strong>Bandung → Yogyakarta</strong>
-                                <span class="booking-status status-pending">Menunggu Pembayaran</span>
-                            </div>
-                            <div class="booking-date">25 Mar 2024</div>
+                            <div class="booking-date"><?= date('D-M-Y', strtotime($duaHistoryUser[0]['departure_time'])) ?></div>
                         </div>
                     </div>
                 <?php } ?>
