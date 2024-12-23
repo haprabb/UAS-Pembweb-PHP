@@ -15,109 +15,8 @@ $gambarUser  = getImageUser(getConnection(), $userID)[0]['image'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/historyUser .css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: #f1f1f1;
-            padding: 60px 20px;
-            /* Padding untuk menghindari navbar */
-            color: #333;
-        }
-
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 15px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            transition: 0.5s;
-        }
-
-        .navbar-brand {
-            font-size: 32px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #6366f1, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-        }
-
-        .navbar-nav .nav-link {
-            padding: 8px 20px;
-            margin: 0 5px;
-            font-weight: 500;
-            color: #374151;
-            transition: all 0.3s ease;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: #3b82f6;
-        }
-
-        .history-container {
-            max-width: 900px;
-            margin: 80px auto;
-            /* Margin atas untuk menghindari navbar */
-            background: #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        .history-item {
-            padding: 20px;
-            border-bottom: 1px solid #eee;
-            transition: background-color 0.3s ease;
-        }
-
-        .history-item:last-child {
-            border-bottom: none;
-        }
-
-        .history-item:hover {
-            background-color: #f7f7f7;
-        }
-
-        .history-details h3 {
-            font-size: 1.4em;
-            margin: 0;
-            color: #2f00ff;
-        }
-
-        .history-details p {
-            font-size: 1em;
-            color: #666;
-            margin: 8px 0;
-        }
-
-        .history-details p strong {
-            color: #333;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #777;
-        }
-
-        footer a {
-            text-decoration: none;
-            color: #4c8baf;
-        }
-    </style>
+    <link rel="stylesheet" href="../styles/historyUser.css">
+    
 </head>
 
 <body>
@@ -125,7 +24,7 @@ $gambarUser  = getImageUser(getConnection(), $userID)[0]['image'];
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="#">
-                TravelKuy<span class="text-primary">.</span>
+                Riwayat Perjalanan<span class="text-primary">.</span>
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

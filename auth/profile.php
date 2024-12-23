@@ -306,12 +306,6 @@ $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
 
-            <div class="back-button">
-                <a href="../index.php" class="back-btn">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>Kembali</span>
-                </a>
-            </div>
             <!-- Brand -->
             <a class="navbar-brand" href="#">
                 TravelKuy<span class="text-primary">.</span>
