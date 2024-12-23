@@ -11,7 +11,7 @@ $formatGambarUpload = explode(".", $gambarUpload["name"]);
 $formatGambarUploadAkhir = end($formatGambarUpload);
 $namaFileUpload = $formatGambarUpload[0];
 
-$gambarUpload['name'] = "$userID-$userName-$namaFileUpload.$formatGambarUploadAkhir";
+$gambarUpload['name'] = "$userID-$userName.$formatGambarUploadAkhir";
 
 if ($gambarUpload['error'] == 0) {
     if ($gambarUpload['size'] > 10_000_000) {
@@ -38,7 +38,12 @@ if ($gambarUpload['error'] == 0) {
         </script>
         SCRIPT;
         } else {
-            echo "Gagal mengunggah file.";
+            echo <<<SCRIPT
+        <script>
+        alert('Gagal mengunggah file!');
+        document.location.href = "../auth/profile.php";
+        </script>
+        SCRIPT;
         }
     }
 } else {

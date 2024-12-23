@@ -127,10 +127,10 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
 
                 <div class="col-md-6 mb-4">
                     <div class="card border-0 shadow">
-                        <img src="images/team/member4.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 4" style="width: 150px; height: 150px; object-fit: cover;">
+                        <img src="images/owner/ridwan.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 4" style="width: 150px; height: 150px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">Ridwanul Bakhri</h5>
-                            <p class="card-text">Marketing Specialist</p>
+                            <p class="card-text">Back-End Developer</p>
                             <p><i class="fas fa-envelope me-2"></i>ridwanulbakhri@student.uns.ac.id</p>
                         </div>
                     </div>
