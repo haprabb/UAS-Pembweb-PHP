@@ -18,6 +18,22 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/style1.css">
     <link rel="stylesheet" href="styles/navbar.css">
+    <style>
+        .card {
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-body {
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -84,8 +100,16 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
             </div>
         </div>
     </nav>
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center">Daftar Destinasi</h2>
+        <div id="destinationCards" class="row">
+            <!-- Kartu destinasi akan dimuat di sini oleh JavaScript -->
+        </div>
+    </div>
+
+    <script src="scripts/ajax2.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+
 </body>
 
 </html>
