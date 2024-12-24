@@ -57,9 +57,6 @@ $historyData = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <?php if ($history['status'] != 'cancelled' && $history['status'] != 'pending'): ?>
                                 <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#reviewModal" data-id="<?= $history['id'] ?>" data-ticket="<?= $history['ticket_id'] ?>">Ulasan</button>
                             <?php endif; ?>
-                            <?php if ($history['status'] != 'cancelled'): ?>
-                                <button class="btn btn-danger btn-sm cancel-btn" data-id="<?= $history['id'] ?>">Batalkan</button>
-                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -98,32 +95,7 @@ $historyData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.querySelectorAll('.cancel-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const id = this.getAttribute('data-id');
-                if (confirm('Yakin ingin membatalkan pesanan ini?')) {
-                    fetch('../logic/cancel-booking.php', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                id: id
-                            }),
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.success) {
-                                alert('Pesanan berhasil dibatalkan.');
-                                location.reload();
-                            } else {
-                                alert('Gagal membatalkan pesanan.');
-                            }
-                        });
-                }
-            });
-        });
-
+    
         document.getElementById('reviewModal').addEventListener('show.bs.modal', function(event) {
             const button = event.relatedTarget;
             const ticketId = button.getAttribute('data-ticket');
