@@ -4,7 +4,7 @@ function updateImage($connection, $id, $namaImage)
 {
     $con = $connection;
 
-    $query = "UPDATE users set image='$namaImage' WHERE id='$id'";
+    $query = "UPDATE users set image='$namaImage', updated_at=current_timestamp() WHERE id='$id'";
     $respon =  $con->exec($query);
     $con = null;
     return $respon;
