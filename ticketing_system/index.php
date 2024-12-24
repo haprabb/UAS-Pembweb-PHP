@@ -4,7 +4,23 @@ include "../query-db/users.php";
 include "../config/connection.php";
 
 $userID = $_COOKIE["logusid"];
-$gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
+
+if(!isset($_COOKIE['logus135'])){
+    echo <<<SCRIPT
+               <script>
+                   alert('Login terlebih dahulu!');
+                   document.location.href = "../index.php";
+               </script>
+    SCRIPT;
+}
+
+$gambarUser = getImageUser(getConnection(), $userID);
+
+if(count($gambarUser) > 0){
+    $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
+}else{
+    $gambarUser = "default-photo.jpg";
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +68,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                     <!-- Login/Profile Section -->
                     <?php if (!isset($_COOKIE['logus135'])): ?>
                         <li class="nav-item ms-3">
-                            <a href="auth/login.php" class="btn btn-primary login-btn rounded-pill">
+                            <a href="../auth/login.php" class="btn btn-primary login-btn rounded-pill">
                                 <i class="fas fa-sign-in-alt me-2"></i>Login
                             </a>
                         </li>
@@ -229,17 +245,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                         <td>${ticket.name}</td>
                         <td>${jenis}</td>
                         <td>${lokasi}</td>
-                        <td>
-                        <button 
-                            class="btn btn-success btn-sm buy-ticket" 
-                            data-id="${ticket}" 
-                            data-bs-toggle="modal" 
-                            data-bs-target="#buyTicketModal"
-                            <?= isset($_COOKIE['logus135']) ? "" : "disabled" ?> >
-                            Beli
-                        </button>
-                    </td>
-
+                        <td><button class="btn btn-success btn-sm buy-ticket" data-id="${ticket.id}" data-bs-toggle="modal" data-bs-target="#buyTicketModal">Beli</button></td>
                     </tr>`;
                         });
                         $('#resultTable tbody').html(rows);
