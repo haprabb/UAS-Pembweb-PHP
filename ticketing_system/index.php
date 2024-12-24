@@ -122,6 +122,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                         <th>Nama</th>
                         <th>Jenis</th>
                         <th>Lokasi</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -158,39 +159,67 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
             </div>
         </div>
     </div>
+    <div class="modal fade" id="buyTicketModal" tabindex="-1" aria-labelledby="buyTicketModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="buyTicketModalLabel">Beli Tiket</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="buyTicketForm">
+                        <input type="hidden" id="ticketId" name="ticket_id">
+                        <div class="mb-3">
+                            <label for="buyerName" class="form-label">Nama</label>
+                            <input type="text" class="form-control" id="buyerName" name="buyer_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ticketQuantity" class="form-label">Jumlah Tiket</label>
+                            <input type="number" class="form-control" id="ticketQuantity" name="quantity" min="1" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Beli</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
-    // Populate select options
-    $.get('api.php?action=getCities', function(data) {
-        const cities = JSON.parse(data);
-        cities.forEach(city => {
-            $('#departure, #destination').append(`<option value="${city}">${city}</option>`);
-        });
-    });
+            // Populate select options for departure and destination
+            $.get('api.php?action=getCities', function(data) {
+                const cities = JSON.parse(data);
+                $('#departure, #destination').empty().append('<option value="" disabled selected>Pilih Kota</option>');
+                cities.forEach(city => {
+                    $('#departure, #destination').append(`<option value="${city}">${city}</option>`);
+                });
+            });
 
-    // Search Tickets
-    $('#searchTicket').on('click', function() {
-        const departure = $('#departure').val();
-        const destination = $('#destination').val();
-        if (departure && destination) {
-            $.get('api.php?action=searchTickets', { departure, destination }, function(data) {
-                const tickets = JSON.parse(data);
-                let rows = '';
-                tickets.forEach(ticket => {
-                    // Determine the type and location
-                    let jenis = '';
-                    if (ticket.name.startsWith('PLANE')) {
-                        jenis = 'Pesawat';
-                    } else if (ticket.name.startsWith('SHIP')) {
-                        jenis = 'Kapal';
-                    } else if (ticket.name.startsWith('KA')) {
-                        jenis = 'Kereta Api';
-                    }
-                    const lokasi = ticket.name.split(' ').slice(1).join(' '); // Extract location after the type
+            // Search Tickets
+            $('#searchTicket').on('click', function() {
+                const departure = $('#departure').val();
+                const destination = $('#destination').val();
+                if (departure && destination) {
+                    $.get('api.php?action=searchTickets', {
+                        departure,
+                        destination
+                    }, function(data) {
+                        const tickets = JSON.parse(data);
+                        let rows = '';
+                        tickets.forEach(ticket => {
+                            let jenis = '';
+                            if (ticket.name.startsWith('PLANE')) {
+                                jenis = 'Pesawat';
+                            } else if (ticket.name.startsWith('SHIP')) {
+                                jenis = 'Kapal';
+                            } else if (ticket.name.startsWith('KA')) {
+                                jenis = 'Kereta Api';
+                            }
+                            const lokasi = ticket.name.split(' ').slice(1).join(' ');
 
-                    rows += `<tr>
+                            rows += `<tr>
                         <td>${ticket.id}</td>
                         <td>${ticket.departure}</td>
                         <td>${ticket.destination}</td>
@@ -199,33 +228,33 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                         <td>${ticket.name}</td>
                         <td>${jenis}</td>
                         <td>${lokasi}</td>
+                        <td><button class="btn btn-success btn-sm buy-ticket" data-id="${ticket.id}" data-bs-toggle="modal" data-bs-target="#buyTicketModal">Beli</button></td>
                     </tr>`;
-                });
-                $('#resultTable tbody').html(rows);
-            });
-        } else {
-            alert('Silakan pilih kota keberangkatan dan tujuan!');
-        }
-    });
-
-    // View All Tickets
-    $('#viewTickets').on('click', function() {
-        $.get('api.php?action=getAllTickets', function(data) {
-            const tickets = JSON.parse(data);
-            let rows = '';
-            tickets.forEach(ticket => {
-                // Determine the type and location
-                let jenis = '';
-                if (ticket.name.startsWith('PLANE')) {
-                    jenis = 'Pesawat';
-                } else if (ticket.name.startsWith('SHIP')) {
-                    jenis = 'Kapal';
-                } else if (ticket.name.startsWith('KA')) {
-                    jenis = 'Kereta Api';
+                        });
+                        $('#resultTable tbody').html(rows);
+                    });
+                } else {
+                    alert('Silakan pilih kota keberangkatan dan tujuan!');
                 }
-                const lokasi = ticket.name.split(' ').slice(1).join(' '); // Extract location after the type
+            });
 
-                rows += `<tr>
+            // View All Tickets
+            $('#viewTickets').on('click', function() {
+                $.get('api.php?action=getAllTickets', function(data) {
+                    const tickets = JSON.parse(data);
+                    let rows = '';
+                    tickets.forEach(ticket => {
+                        let jenis = '';
+                        if (ticket.name.startsWith('PLANE')) {
+                            jenis = 'Pesawat';
+                        } else if (ticket.name.startsWith('SHIP')) {
+                            jenis = 'Kapal';
+                        } else if (ticket.name.startsWith('KA')) {
+                            jenis = 'Kereta Api';
+                        }
+                        const lokasi = ticket.name.split(' ').slice(1).join(' ');
+
+                        rows += `<tr>
                     <td>${ticket.id}</td>
                     <td>${ticket.departure}</td>
                     <td>${ticket.destination}</td>
@@ -235,12 +264,39 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                     <td>${jenis}</td>
                     <td>${lokasi}</td>
                 </tr>`;
+                    });
+                    $('#allTicketsTable tbody').html(rows);
+                });
             });
-            $('#allTicketsTable tbody').html(rows);
-        });
-    });
-});
 
+            // Open Buy Ticket Modal
+            $(document).on('click', '.buy-ticket', function() {
+                const ticketId = $(this).data('id');
+                $('#ticketId').val(ticketId);
+            });
+
+            // Handle Buy Ticket
+            $('#buyTicketForm').on('submit', function(e) {
+                e.preventDefault();
+                const formData = $(this).serialize();
+                $.post('api.php?action=buyTicket', formData, function(response) {
+                    alert(response.message);
+
+                    // Explicitly hide the modal
+                    const buyTicketModal = bootstrap.Modal.getInstance(document.getElementById('buyTicketModal'));
+                    if (buyTicketModal) {
+                        buyTicketModal.hide();
+                    }
+
+                    // Remove any remaining modal backdrop
+                    $('.modal-backdrop').remove();
+                    $('body').removeClass('modal-open');
+
+                    // Clear the form fields
+                    $('#buyTicketForm')[0].reset();
+                }, 'json');
+            });
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
