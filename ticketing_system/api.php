@@ -52,7 +52,7 @@ if ($action === 'getCities') {
             'quantity' => $quantity
         ]);
 
-        $query = "INSERT INTO purchases (user_id, ticket_id, purchases_date, quantity, user_name) VALUES (:user_id, :ticket_id, NOW(), :quantity)";
+        $query = "INSERT INTO purchases (user_id, ticket_id, purchases_date, quantity, user_name) VALUES (:user_id, :ticket_id, NOW(), :quantity, :user_name)";
         $stmt = $conn->prepare($query);
         $stmt->execute([
             'user_id' => $userId,
