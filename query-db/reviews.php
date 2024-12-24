@@ -3,7 +3,7 @@
 function getRatingUser($connection, $id)
 {
     $con = $connection;
-    $query = "SELECT rating FROM reviews where user_id='$id'";
+    $query = "SELECT rating FROM reviews where user_id='$id' AND rating > 0";
     $result = $con->query($query);
     $con = null;
     $results = $result->fetchAll(PDO::FETCH_ASSOC);

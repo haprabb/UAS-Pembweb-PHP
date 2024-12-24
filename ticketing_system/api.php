@@ -41,14 +41,15 @@ if ($action === 'getCities') {
 
     if ($ticket) {
         // Insert into history
-        $query = "INSERT INTO history (user_id, ticket_id, booking_code, from_location, to_location, departure_time, status) VALUES (:user_id, :ticket_id, :booking_code, :from_location, :to_location, NOW(), 'confirmed')";
+        $query = "INSERT INTO history (user_id, ticket_id, booking_code, from_location, to_location, departure_time, status) VALUES (:user_id, :ticket_id, :booking_code, :from_location, :to_location, NOW(), 'confirmed', :quantity)";
         $stmt = $conn->prepare($query);
         $stmt->execute([
             'user_id' => $userId,
             'ticket_id' => $ticketId,
             'booking_code' => $bookingCode,
             'from_location' => $ticket['departure'],
-            'to_location' => $ticket['destination']
+            'to_location' => $ticket['destination'],
+            'quantity' => $quantity
         ]);
 
         echo json_encode(['message' => 'Tiket berhasil dibeli!']);

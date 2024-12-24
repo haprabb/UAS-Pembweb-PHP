@@ -348,7 +348,7 @@ $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
         <div class="profile-stats">
             <div class="stat-card">
                 <div class="stat-number">
-                    <?= $dataHistoryUser[0]["total_pemesanan"]?>
+                    <?= $dataHistoryUser[0]["total_pemesanan"] ?>
                 </div>
                 <div class="stat-label">Total Perjalanan</div>
             </div>
@@ -392,74 +392,48 @@ $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
                         <div class="booking-card">
                             <div class="booking-header">
                                 <strong><?= $duaHistoryUser[0]['from_location'] ?> → <?= $duaHistoryUser[0]['to_location'] ?></strong>
-                                <span class="booking-status status-paid"><?= $duaHistoryUser[0]['status']?></span>
+                                <span class="booking-status status-paid"><?= $duaHistoryUser[0]['status'] ?></span>
                             </div>
                             <div class="booking-date"><?= date('D-M-Y', strtotime($duaHistoryUser[0]['departure_time'])) ?></div>
                         </div>
                     </div>
                 <?php } ?>
+                <div class="container text-center mt-5">
+                    <!-- Tombol Update -->
+                    <button type="button" class="btn btn-outline-light border border-secondary text-dark me-3" id="flip">
+                        Update Foto
+                    </button>
 
-                <h3 class="mt-4">Semua Riwayat Pembelian</h3>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Ticket ID</th>
-                                <th>Nama Pengguna</th>
-                                <th>Tanggal Pembelian</th>
-                                <th>Jumlah</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $pdo = getConnection();
-                            $query = "SELECT * FROM purchases";
-                            $stmt = $pdo->query($query);
-                            while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                echo "<tr>";
-                                echo "<td>" . $row['id'] . "</td>";
-                                echo "<td>" . $row['ticket_id'] . "</td>";
-                                echo "<td>" . $row['user_name'] . "</td>";
-                                echo "<td>" . date('d-m-Y', strtotime($row['purchase_date'])) . "</td>";
-                                echo "<td>" . $row['quantity'] . "</td>";
-                                echo "<td><a href='print.php?id=" . $row['id'] . "' class='btn btn-outline-light border border-secondary text-dark btn-sm'>Lihat History</a></td>";
-                                echo "</tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                    <a href="history-user.php">
+                        <button type="button" class="btn btn-outline-light border border-secondary text-dark me-3" id="flip">
+                            Lihat History
+                        </button>
+                    </a>
+
+
+                </div>
+                <div id="panel">
+                    <!-- Form untuk upload gambar -->
+                    <form action="../logic/update-profile-user.php" method="post" enctype="multipart/form-data" id="updateAvatarForm" class="text-center mt-4">
+                        <div class="mb-3">
+                            <input type="hidden" name="user-id" value="<?= $_COOKIE["logusid"] ?>">
+                            <input type="hidden" name="user-name" value="<?= $_COOKIE["logusname"] ?>">
+                            <label for="avatarInput" class="form-label">Pilih Gambar Baru</label>
+                            <input type="file" id="avatarInput" class="form-control" accept="image/*" name="update-image">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload Gambar</button>
+                    </form>
                 </div>
             </div>
-            <div class="container text-center mt-5">
-                <!-- Tombol Update -->
-                <button type="button" class="btn btn-outline-light border border-secondary text-dark me-3" id="flip">
-                    Update Foto
-                </button>
-            </div>
-            <div id="panel">
-                <!-- Form untuk upload gambar -->
-                <form action="../logic/update-profile-user.php" method="post" enctype="multipart/form-data" id="updateAvatarForm" class="text-center mt-4">
-                    <div class="mb-3">
-                        <input type="hidden" name="user-id" value="<?= $_COOKIE["logusid"] ?>">
-                        <input type="hidden" name="user-name" value="<?= $_COOKIE["logusname"] ?>">
-                        <label for="avatarInput" class="form-label">Pilih Gambar Baru</label>
-                        <input type="file" id="avatarInput" class="form-control" accept="image/*" name="update-image">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Upload Gambar</button>
-                </form>
-            </div>
         </div>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#flip").click(function() {
-                $("#panel").slideToggle("slow");
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#flip").click(function() {
+                    $("#panel").slideToggle("slow");
+                });
             });
-        });
-    </script>
+        </script>
 
 </body>
 
