@@ -348,7 +348,7 @@ $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
         <div class="profile-stats">
             <div class="stat-card">
                 <div class="stat-number">
-                    <?php $dataHistoryUser?>
+                    <?= $dataHistoryUser?>
                 </div>
                 <div class="stat-label">Total Perjalanan</div>
             </div>
