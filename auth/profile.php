@@ -18,10 +18,6 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
 $userID = $_COOKIE["logusid"];
 
 $dataHistoryUser = getJumlahHistoryUser(getConnection(), $userID);
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of af8ff09 (Merge branch 'main' of https://github.com/haprabb/UAS-Pembweb-PHP)
 $dataRatingUser = getRatingUser(getConnection(), $userID);
 $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
 $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
