@@ -267,10 +267,7 @@
                         <a class="nav-link" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../destinasi.php">Destinasi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.php#features">Fitur</a>
+                        <a class="nav-link active" href="index.php">Tiket</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../about.php">Tentang</a>
