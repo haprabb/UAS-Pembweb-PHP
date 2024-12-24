@@ -23,14 +23,13 @@ $historyData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <title>Detail History Pemesanan</title>
+\/6\n
+<head>6
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/navbar.css">
-    <link rel="stylesheet" href="../styles/style1.css">
-</head>
+    <link rel="stylesheet" href="../styles/style1.css">6666666666666666666666666666666666666666\
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">

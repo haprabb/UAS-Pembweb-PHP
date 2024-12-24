@@ -91,22 +91,24 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                 <!-- Anggota Tim -->
                 <div class="col-md-4 mb-4">
                     <div class="card border-0 shadow">
-                        <img src="images/owner/diaz.jpeg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 1" style="width: 150px; height: 150px; object-fit: cover;">
+                        <img src="images/owner/diaz.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 1" style="width: 150px; height: 150px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">Diaz Rangga Saksena</h5>
+                            <h5 class="card-title">K3522020</h5>
                             <p class="card-text">UI/UX Designer</p>
-                            <p><i class="fas fa-envelope me-2"></i>rizky@travelkuy.com</p>
+                            <p><i class="fas fa-envelope me-2"></i>diazsaksena20@student.uns.ac.id</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-4 mb-4">
                     <div class="card border-0 shadow">
-                        <img src="images/owner/Cahyo.jpeg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 2" style="width: 150px; height: 150px; object-fit: cover;">
+                        <img src="images/owner/Cahyo.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 2" style="width: 150px; height: 150px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">Lasminanto Nur Cahyo</h5>
-                            <p class="card-text">Backend Developer</p>
-                            <p><i class="fas fa-envelope me-2"></i>dewi@travelkuy.com</p>
+                            <h5 class="card-title">K3522038</h5>
+                            <p class="card-text">Frontend Developer</p>
+                            <p><i class="fas fa-envelope me-2"></i>nurcahyo01@student.uns.ac.id</p>
                         </div>
                     </div>
                 </div>
@@ -116,6 +118,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                         <img src="images/owner/wildan.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 3" style="width: 150px; height: 150px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">Muhammad Wildan Azizi</h5>
+                            <h5 class="card-title">K3522050</h5>
                             <p class="card-text">Frontend Developer</p>
                             <p><i class="fas fa-envelope me-2"></i>budi@travelkuy.com</p>
                         </div>
@@ -127,6 +130,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                         <img src="images/owner/ridwan.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 4" style="width: 150px; height: 150px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">Ridwanul Bakhri</h5>
+                            <h5 class="card-title">K3522068</h5>
                             <p class="card-text">Back-End Developer</p>
                             <p><i class="fas fa-envelope me-2"></i>ridwanulbakhri@student.uns.ac.id</p>
                         </div>
@@ -138,7 +142,8 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                         <img src="images/owner/haprab.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 5" style="width: 150px; height: 150px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">Rizqi Satya Haprabu</h5>
-                            <p class="card-text">Project Manager</p>
+                            <h5 class="card-title">K3522072</h5>
+                            <p class="card-text">Back-End Developer</p>
                             <p><i class="fas fa-envelope me-2"></i>andi@travelkuy.com</p>
                         </div>
                     </div>
