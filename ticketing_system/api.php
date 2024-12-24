@@ -1,57 +1,61 @@
 <?php
-// api.php
+include '../config/connection.php';
 
-// Koneksi database
-include('db.php');
+$action = $_GET['action'] ?? '';
+$conn = getConnection();
 
-// Menangani pencarian tiket berdasarkan dari dan tujuan
-if (isset($_GET['from']) && isset($_GET['to'])) {
-    $from = $_GET['from'];
-    $to = $_GET['to'];
-
-    $query = "SELECT * FROM tickets WHERE departure = ? AND destination = ?";
+if ($action === 'getCities') {
+    $query = "SELECT DISTINCT departure FROM tickets UNION SELECT DISTINCT destination FROM tickets";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ss", $from, $to);
     $stmt->execute();
-    $result = $stmt->get_result();
-
-    $tickets = [];
-    while ($row = $result->fetch_assoc()) {
-        $tickets[] = $row;
-    }
-
+    $cities = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    echo json_encode($cities);
+} elseif ($action === 'searchTickets') {
+    $departure = $_GET['departure'];
+    $destination = $_GET['destination'];
+    $query = "SELECT * FROM tickets WHERE departure = :departure AND destination = :destination";
+    $stmt = $conn->prepare($query);
+    $stmt->execute(['departure' => $departure, 'destination' => $destination]);
+    $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($tickets);
-}
-
-// Menangani pembelian tiket dan memasukkan data ke tabel purchases
-if (isset($_POST['ticket_id']) && isset($_POST['user_name'])) {
-    $ticket_id = $_POST['ticket_id'];
-    $user_name = $_POST['user_name'];
-    $purchase_date = date('Y-m-d H:i:s'); // Menambahkan tanggal dan waktu pembelian
-
-    // Menambahkan pembelian ke tabel purchases
-    $query = "INSERT INTO purchases (ticket_id, user_name, quantity, purchase_date) VALUES (?, ?, 1, ?)";
+} elseif ($action === 'getAllTickets') {
+    $query = "SELECT * FROM tickets";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("iss", $ticket_id, $user_name, $purchase_date);
     $stmt->execute();
+    $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($tickets);
+}elseif ($action === 'buyTicket') {
+    $ticketId = $_POST['ticket_id'];
+    $buyerName = $_POST['buyer_name'];
+    $quantity = $_POST['quantity'];
+    $userId = $_COOKIE['logusid']; // Assuming user ID is stored in cookies
 
-    // Update kursi yang tersedia setelah pembelian
-    $update_query = "UPDATE tickets SET seat_available = seat_available - 1 WHERE id = ?";
-    $update_stmt = $conn->prepare($update_query);
-    $update_stmt->bind_param("i", $ticket_id);
-    $update_stmt->execute();
+    // Generate booking code
+    $bookingCode = strtoupper(substr(md5(uniqid()), 0, 10));
 
-    // Melakukan pengecekan apakah data berhasil dimasukkan ke tabel purchases dan kursi diperbarui
-    if ($stmt->affected_rows > 0 && $update_stmt->affected_rows > 0) {
-        echo json_encode([
-            "status" => "success", 
-            "message" => "Ticket purchased successfully!"
+    // Fetch ticket details
+    $query = "SELECT * FROM tickets WHERE id = :ticket_id";
+    $stmt = $conn->prepare($query);
+    $stmt->execute(['ticket_id' => $ticketId]);
+    $ticket = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($ticket) {
+        // Insert into history
+        $query = "INSERT INTO history (user_id, ticket_id, booking_code, from_location, to_location, departure_time, status) VALUES (:user_id, :ticket_id, :booking_code, :from_location, :to_location, NOW(), 'confirmed')";
+        $stmt = $conn->prepare($query);
+        $stmt->execute([
+            'user_id' => $userId,
+            'ticket_id' => $ticketId,
+            'booking_code' => $bookingCode,
+            'from_location' => $ticket['departure'],
+            'to_location' => $ticket['destination']
         ]);
+
+        echo json_encode(['message' => 'Tiket berhasil dibeli!']);
     } else {
-        echo json_encode([
-            "status" => "error",
-            "message" => "Error in purchasing ticket."
-        ]);
+        echo json_encode(['message' => 'Tiket tidak ditemukan!']);
     }
 }
+
+$conn = null;
 ?>

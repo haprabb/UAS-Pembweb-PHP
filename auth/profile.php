@@ -18,7 +18,10 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
 $userID = $_COOKIE["logusid"];
 
 $dataHistoryUser = getJumlahHistoryUser(getConnection(), $userID);
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of af8ff09 (Merge branch 'main' of https://github.com/haprabb/UAS-Pembweb-PHP)
 $dataRatingUser = getRatingUser(getConnection(), $userID);
 $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
 $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
@@ -349,7 +352,13 @@ $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
         <div class="profile-stats">
             <div class="stat-card">
                 <div class="stat-number">
-                    <?= $dataHistoryUser[0]['total_pemesanan'] ?>
+                    <?php
+                    $pdo = getConnection();
+                    $query = "SELECT COUNT(*) as total FROM purchases";
+                    $stmt = $pdo->query($query);
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    echo $result['total'];
+                    ?>
                 </div>
                 <div class="stat-label">Total Perjalanan</div>
             </div>
