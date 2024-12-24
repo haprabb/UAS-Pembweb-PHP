@@ -348,13 +348,7 @@ $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
         <div class="profile-stats">
             <div class="stat-card">
                 <div class="stat-number">
-                    <?php
-                    $pdo = getConnection();
-                    $query = "SELECT COUNT(*) as total FROM purchases";
-                    $stmt = $pdo->query($query);
-                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                    echo $result['total'];
-                    ?>
+                    <?php $dataHistoryUser?>
                 </div>
                 <div class="stat-label">Total Perjalanan</div>
             </div>
