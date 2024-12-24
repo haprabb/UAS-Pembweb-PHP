@@ -64,7 +64,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end slideIn" aria-labelledby="userDropdown">
                                 <li>
-                                    <a class="dropdown-item" href="auth/profile.php">
+                                    <a class="dropdown-item" href="../auth/profile.php">
                                         <i class="fas fa-user me-2 text-primary"></i>Profil Saya
                                     </a>
                                 </li>
