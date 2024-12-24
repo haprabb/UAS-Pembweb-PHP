@@ -50,7 +50,7 @@ $historyData = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <!-- Menu Items -->
                 <ul class="navbar-nav align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link active" href="../index.php">Home</a>
+                        <a class="nav-link" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../ticketing_system/index.php">Tiket</a>

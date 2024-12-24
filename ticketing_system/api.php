@@ -52,6 +52,15 @@ if ($action === 'getCities') {
             'quantity' => $quantity
         ]);
 
+        $query = "INSERT INTO purchases (user_id, ticket_id, purchases_date, quantity, user_name) VALUES (:user_id, :ticket_id, NOW(), :quantity)";
+        $stmt = $conn->prepare($query);
+        $stmt->execute([
+            'user_id' => $userId,
+            'ticket_id' => $ticketId,
+            'quantity' => $quantity,
+            'user_name' => $buyerName
+        ]);
+
         echo json_encode(['message' => 'Tiket berhasil dibeli!']);
     } else {
         echo json_encode(['message' => 'Tiket tidak ditemukan!']);
