@@ -40,10 +40,10 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                 <!-- Menu Items -->
                 <ul class="navbar-nav align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link active" href="../index.php">Home</a>
+                        <a class="nav-link" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">Tiket</a>
+                        <a class="nav-link active" href="index.php">Tiket</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../about.php">Tentang</a>
