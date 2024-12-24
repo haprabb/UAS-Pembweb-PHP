@@ -3,8 +3,25 @@
 include "../query-db/users.php";
 include "../config/connection.php";
 
+if (!isset($_COOKIE["logus135"])) {
+    echo <<<SCRIPT
+               <script>
+                   alert('Login terlebih dahulu!');
+                   document.location.href = "../index.php";
+               </script>
+    SCRIPT;
+    exit();
+}
+
 $userID = $_COOKIE["logusid"];
-$gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
+
+$gambarUser = getImageUser(getConnection(), $userID);
+
+if (count($gambarUser) > 0) {
+    $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
+} else {
+    $gambarUser = "default-photo.jpg";
+}
 ?>
 
 <!DOCTYPE html>

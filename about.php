@@ -4,7 +4,14 @@ include "query-db/users.php";
 include "config/connection.php";
 
 $userID = $_COOKIE["logusid"];
-$gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
+
+$gambarUser = getImageUser(getConnection(), $userID);
+
+if(count($gambarUser) > 0){
+    $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
+}else{
+    $gambarUser = "default-photo.jpg";
+}
 ?>
 
 <!DOCTYPE html>

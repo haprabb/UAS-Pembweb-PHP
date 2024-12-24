@@ -24,7 +24,13 @@ $stmt->execute(['user_id' => $userID]);
 $historyData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Ambil gambar pengguna
-$gambarUser = getImageUser($pdo, $userID)[0]['image'];
+$gambarUser = getImageUser(getConnection(), $userID);
+
+if(count($gambarUser) > 0){
+    $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
+}else{
+    $gambarUser = "default-photo.jpg";
+}
 ?>
 
 <!DOCTYPE html>

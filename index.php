@@ -4,7 +4,15 @@ include "query-db/users.php";
 include "config/connection.php";
 
 $userID = $_COOKIE["logusid"];
-$gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
+
+$gambarUser = getImageUser(getConnection(), $userID);
+
+if(count($gambarUser) > 0){
+    $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
+}else{
+    $gambarUser = "default-photo.jpg";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -147,59 +155,6 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
     </section>
 
     <!-- Popular Destinations -->
-    <section class="destinations" id="destinations">
-        <div class="section-title">
-            <h2>Destinasi Populer</h2>
-            <p>Temukan tempat-tempat menakjubkan untuk liburan Anda</p>
-        </div>
-
-        <div class="destination-grid">
-            <!-- Destination Cards -->
-            <!-- Card 1 -->
-            <div class="destination-card">
-                <div class="destination-img">
-                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4" alt="Bali">
-                </div>
-                <div class="destination-info">
-                    <h3>Bali</h3>
-                    <p>Nikmati keindahan pantai dan budaya yang memukau di Pulau Dewata</p>
-                    <span class="price">Mulai Rp 5.000.000</span>
-                    <a href="ticketing_system/index.php" class="book-btn">Pesan Sekarang</a>
-                </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="destination-card">
-                <div class="destination-img">
-                    <img src="https://images.unsplash.com/photo-1570789210967-2cac24afeb00" alt="Raja Ampat">
-                </div>
-                <div class="destination-info">
-                    <h3>Raja Ampat</h3>
-                    <p>Jelajahi surga bawah laut dengan keindahan terumbu karang</p>
-                    <span class="price">Mulai Rp 8.000.000</span>
-                    <a href="ticketing_system/index.php" class="book-btn">Pesan Sekarang</a>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="destination-card">
-                <div class="destination-img">
-                    <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2" alt="Labuan Bajo">
-                </div>
-                <div class="destination-info">
-                    <h3>Labuan Bajo</h3>
-                    <p>Temui komodo dan nikmati pemandangan laut yang memukau</p>
-                    <span class="price">Mulai Rp 6.500.000</span>
-                    <a href="ticketing_system/index.php" class="book-btn">Pesan Sekarang</a>
-                </div>
-            </div>
-        </div>
-        <div class="load-more-card">
-            <a href="destinasi.php" class="book-btn">Tampilkan Lebih</a>
-        </div>
-
-        </div>
-    </section>
 
     <!-- Features Section -->
     <section class="features" id="features">
