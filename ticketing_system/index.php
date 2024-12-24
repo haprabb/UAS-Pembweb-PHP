@@ -59,7 +59,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                     <?php else: ?>
                         <li class="nav-item dropdown ms-3">
                             <a class="nav-link dropdown-toggle user-profile d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../images/user/<?= $gambarUser ?>" alt="User Profile" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                <img src="images/user/<?= $gambarUser ?>" alt="User Profile" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
                                 <span class="d-none d-lg-inline fw-medium"><?php echo $_COOKIE['logusname']; ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end slideIn" aria-labelledby="userDropdown">
@@ -185,7 +185,8 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
             // Populate select options for departure and destination
@@ -298,7 +299,6 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
             });
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
