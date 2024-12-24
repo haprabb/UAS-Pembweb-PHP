@@ -325,13 +325,7 @@ $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
                         <a class="nav-link" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../destinasi.php">Destinasi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#features">Fitur</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">Tentang</a>
+                        <a class="nav-link" href="../about.php">Tentang</a>
                     </li>
                     <li class="nav-item">
                         <a href="../logic/logout.php" onclick="return confirm(`Yakin ingin logout?`)"><button class="btn btn-danger px-4 py-2 rounded-pill" id="logoutButton">

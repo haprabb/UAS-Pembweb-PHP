@@ -88,7 +88,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                         <a class="nav-link active" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#features">Fitur</a>
+                        <a class="nav-link" href="ticketing_system/index.php">Tiket</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about.php">Tentang</a>
