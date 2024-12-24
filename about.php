@@ -139,7 +139,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
 
                 <div class="col-md-6 mb-4">
                     <div class="card border-0 shadow">
-                        <img src="images/owner/haprab.png" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 5" style="width: 150px; height: 150px; object-fit: cover;">
+                        <img src="images/owner/haprab2.jpg" class="card-img-top rounded-circle mx-auto mt-3" alt="Anggota 5" style="width: 150px; height: 150px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">Rizqi Satya Haprabu</h5>
                             <h5 class="card-title">K3522072</h5>
