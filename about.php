@@ -127,7 +127,7 @@ if(count($gambarUser) > 0){
                             <h5 class="card-title">Muhammad Wildan Azizi</h5>
                             <h5 class="card-title">K3522050</h5>
                             <p class="card-text">Frontend Developer</p>
-                            <p><i class="fas fa-envelope me-2"></i>budi@travelkuy.com</p>
+                            <p><i class="fas fa-envelope me-2"></i>-</p>
                         </div>
                     </div>
                 </div>
