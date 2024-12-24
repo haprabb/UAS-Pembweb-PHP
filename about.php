@@ -43,9 +43,6 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                         <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="destinasi.php">Destinasi</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#features">Fitur</a>
                     </li>
                     <li class="nav-item">
