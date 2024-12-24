@@ -72,7 +72,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
-                                    <a class="dropdown-item text-danger" href="logic/logout.php">
+                                    <a class="dropdown-item text-danger" href="../logic/logout.php">
                                         <i class="fas fa-sign-out-alt me-2"></i>Keluar
                                     </a>
                                 </li>
