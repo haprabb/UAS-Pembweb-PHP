@@ -59,7 +59,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                     <?php else: ?>
                         <li class="nav-item dropdown ms-3">
                             <a class="nav-link dropdown-toggle user-profile d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="images/user/<?= $gambarUser ?>" alt="User Profile" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+                                <img src="../images/user/<?= $gambarUser ?>" alt="User Profile" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
                                 <span class="d-none d-lg-inline fw-medium"><?php echo $_COOKIE['logusname']; ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end slideIn" aria-labelledby="userDropdown">
