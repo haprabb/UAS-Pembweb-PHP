@@ -41,7 +41,7 @@ if ($action === 'getCities') {
 
     if ($ticket) {
         // Insert into history
-        $query = "INSERT INTO history (user_id, ticket_id, booking_code, from_location, to_location, departure_time, status) VALUES (:user_id, :ticket_id, :booking_code, :from_location, :to_location, NOW(), 'confirmed', :quantity)";
+        $query = "INSERT INTO history (user_id, ticket_id, booking_code, from_location, to_location, departure_time, status, quantity) VALUES (:user_id, :ticket_id, :booking_code, :from_location, :to_location, NOW(), 'confirmed', :quantity)";
         $stmt = $conn->prepare($query);
         $stmt->execute([
             'user_id' => $userId,

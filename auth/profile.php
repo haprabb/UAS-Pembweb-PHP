@@ -387,16 +387,23 @@ $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
                     Riwayat Pemesanan
                 </h2>
                 <?php if (count($duaHistoryUser) == 0) { ?>
-                <?php } else { ?>
                     <div class="booking-history">
                         <div class="booking-card">
-                            <div class="booking-header">
-                                <strong><?= $duaHistoryUser[0]['from_location'] ?> → <?= $duaHistoryUser[0]['to_location'] ?></strong>
-                                <span class="booking-status status-paid"><?= $duaHistoryUser[0]['status'] ?></span>
-                            </div>
-                            <div class="booking-date"><?= date('D-M-Y', strtotime($duaHistoryUser[0]['departure_time'])) ?></div>
+                            Belum pernah memesan apapun
                         </div>
                     </div>
+                <?php } else { ?>
+                    <?php foreach ($duaHistoryUser as $value) { ?>
+                        <div class="booking-history">
+                            <div class="booking-card">
+                                <div class="booking-header">
+                                    <strong><?= $value['from_location'] ?> → <?= $value['to_location'] ?></strong>
+                                    <span class="booking-status status-paid"><?= $value['status'] ?></span>
+                                </div>
+                                <div class="booking-date"><?= date('D-M-Y H:i', strtotime($value['departure_time'])) ?></div>
+                            </div>
+                        </div>
+                    <?php }; ?>
                 <?php } ?>
                 <div class="container text-center mt-5">
                     <!-- Tombol Update -->
