@@ -128,13 +128,18 @@ $gambarUser = getImageUser($pdo, $userID)[0]['image'];
                         </td>
                         <td><?= $history['quantity'] ?></td>
                         <td>
-                            <?php if ($history['status'] != 'cancelled' && $history['status'] != 'pending' && $history['has_review'] == 0): ?>
-                                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#reviewModal" data-id="<?= $history['id'] ?>" data-ticket="<?= $history['ticket_id'] ?>">Ulasan</button>
+                            <?php if ($history['status'] != 'cancelled' && $history['status'] != 'pending'): ?>
+                                <?php if ($history['has_review'] == 0): ?>
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#reviewModal" data-id="<?= $history['id'] ?>" data-ticket="<?= $history['ticket_id'] ?>">Ulasan</button>
+                                <?php else: ?>
+                                    <span class="text-success">Sudah Direview</span>
+                                <?php endif; ?>
                             <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
+
 
         </table>
     </div>

@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
 
         // Redirect ke halaman detail history setelah ulasan berhasil ditambahkan
-        header("Location: ../pages/detail-history.php");
+        header("Location: ../auth/history-user.php");
         exit();
     } catch (PDOException $e) {
         echo "<script>alert('Gagal menyimpan ulasan: {$e->getMessage()}'); window.history.back();</script>";
