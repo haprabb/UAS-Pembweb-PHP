@@ -22,6 +22,21 @@ include '../api/get_admin.php';
             <a class="navbar-brand" href="#">
                 TravelKuy<span class="text-primary">.</span>
             </a>
+            <a href="adminUser.php">
+                <button type="button" class="btn btn-primary mb-3 me-2" data-bs-toggle="modal" data-bs-target="#addPengunjung">
+                    <i class="fas fa-person"></i> Jumlah Pengguna
+                </button>
+            </a>
+            <a href="admin.php">
+                <button type="button" class="btn btn-primary mb-3 me-2" data-bs-toggle="modal" data-bs-target="#addPengunjung">
+                    <i class="fas fa-plus"></i> Tiket
+                </button>
+            </a>
+            <a href="adminGrafik.php">
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addPengunjung">
+                    <i class="fas fa-plus"></i> Grafik Penjualan
+                </button>
+            </a>
 
             <!-- Navbar Content -->
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">

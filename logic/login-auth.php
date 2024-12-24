@@ -28,7 +28,7 @@ if (isset($_POST["button-login"])) {
                echo <<<SCRIPT
                <script>
                    alert('Selamat datang Admin!');
-                   document.location.href = "../admin/index.php";
+                   document.location.href = "../admin/admin.php";
                </script>
                SCRIPT;
                exit();
