@@ -144,7 +144,7 @@ $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
                             <h5 class="card-title">Rizqi Satya Haprabu</h5>
                             <h5 class="card-title">K3522072</h5>
                             <p class="card-text">Back-End Developer</p>
-                            <p><i class="fas fa-envelope me-2"></i>andi@travelkuy.com</p>
+                            <p><i class="fas fa-envelope me-2"></i>haprabb@student.uns.ac.id</p>
                         </div>
                     </div>
                 </div>

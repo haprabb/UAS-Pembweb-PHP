@@ -18,8 +18,6 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
 $userID = $_COOKIE["logusid"];
 
 $dataHistoryUser = getJumlahHistoryUser(getConnection(), $userID);
-var_dump($dataHistoryUser);
-exit();
 
 
 $dataRatingUser = getRatingUser(getConnection(), $userID);

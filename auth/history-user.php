@@ -8,23 +8,29 @@ if (!isset($_COOKIE['logus135']) && $_COOKIE["logusrole"] != "admin") {
     exit();
 }
 
-
-$userID = $_COOKIE["logusid"];
-$gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
-
 $userID = $_COOKIE["logusid"];
 $pdo = getConnection();
-$query = "SELECT * FROM history WHERE user_id = :user_id ORDER BY departure_time DESC";
+
+// Query untuk mendapatkan riwayat pemesanan
+$query = "SELECT h.*, 
+                 (SELECT COUNT(*) 
+                  FROM reviews 
+                  WHERE reviews.user_id = h.user_id AND reviews.ticket_id = h.ticket_id) AS has_review 
+          FROM history h 
+          WHERE h.user_id = :user_id 
+          ORDER BY h.departure_time DESC";
 $stmt = $pdo->prepare($query);
 $stmt->execute(['user_id' => $userID]);
 $historyData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Ambil gambar pengguna
+$gambarUser = getImageUser($pdo, $userID)[0]['image'];
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
-\/6\n
-<head>6
+<head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -122,13 +128,14 @@ $historyData = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </td>
                         <td><?= $history['quantity'] ?></td>
                         <td>
-                            <?php if ($history['status'] != 'cancelled' && $history['status'] != 'pending'): ?>
+                            <?php if ($history['status'] != 'cancelled' && $history['status'] != 'pending' && $history['has_review'] == 0): ?>
                                 <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#reviewModal" data-id="<?= $history['id'] ?>" data-ticket="<?= $history['ticket_id'] ?>">Ulasan</button>
                             <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
+
         </table>
     </div>
 
