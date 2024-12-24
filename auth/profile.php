@@ -18,6 +18,9 @@ $userEmail = $_COOKIE['logusemail']; // Pastikan email disimpan dalam cookie saa
 $userID = $_COOKIE["logusid"];
 
 $dataHistoryUser = getJumlahHistoryUser(getConnection(), $userID);
+var_dump($userID);
+var_dump($dataHistoryUser);
+exit();
 $dataRatingUser = getRatingUser(getConnection(), $userID);
 $gambarUser = getImageUser(getConnection(), $userID)[0]['image'];
 $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
@@ -354,13 +357,7 @@ $duaHistoryUser = getHistoryUser2Row(getConnection(), $userID);
         <div class="profile-stats">
             <div class="stat-card">
                 <div class="stat-number">
-                    <?php
-                    $pdo = getConnection();
-                    $query = "SELECT COUNT(*) as total FROM purchases";
-                    $stmt = $pdo->query($query);
-                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                    echo $result['total'];
-                    ?>
+                    <?= $dataHistoryUser[0]['total_pemesanan'] ?>
                 </div>
                 <div class="stat-label">Total Perjalanan</div>
             </div>
