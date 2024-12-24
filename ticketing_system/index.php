@@ -296,11 +296,6 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="../auth/settings.php">
-                                        <i class="fas fa-cog me-2 text-primary"></i>Pengaturan
-                                    </a>
-                                </li>
-                                <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
@@ -596,5 +591,6 @@
             });
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
